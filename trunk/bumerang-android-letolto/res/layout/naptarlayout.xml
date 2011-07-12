@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="vertical">
+    <FrameLayout android:id="@+id/frameLayout1" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_gravity="top">
+        <LinearLayout android:layout_height="wrap_content" android:orientation="vertical" android:id="@+id/linearLayout1" android:layout_width="fill_parent">
+            <TextView android:shadowColor="#000000" android:gravity="center_horizontal" android:shadowDx="2" android:id="@+id/naptar_header" android:shadowDy="2" android:layout_width="fill_parent" android:padding="3dp" android:layout_height="wrap_content" android:textSize="25dp" android:fadingEdge="horizontal" android:shadowRadius="2" android:textColor="#FFFFFFFF" android:background="@drawable/header_bg"></TextView>
+            <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:layout_width="fill_parent">
+                <Button android:layout_weight="50" android:shadowDx="2" android:id="@+id/button1" android:layout_height="wrap_content" android:textSize="17dp" android:layout_width="fill_parent" android:textColor="#FFFFFFFF" android:shadowColor="#000000" android:shadowDy="2" android:text="Előző hónap" android:shadowRadius="1.5" android:onClick="Back" android:background="@drawable/headerbutton_bg"></Button>
+                <Button android:layout_weight="50" android:shadowDx="2" android:id="@+id/button2" android:layout_height="wrap_content" android:textSize="17dp" android:layout_width="fill_parent" android:textColor="#FFFFFFFF" android:shadowColor="#000000" android:shadowDy="2" android:text="Következő hónap" android:shadowRadius="1.5" android:onClick="Forward" android:background="@drawable/headerbutton_bg"></Button>
+            </LinearLayout>
+       
+            <ListView android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/calendarlist"></ListView>
+        </LinearLayout>
+        <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/header"></ImageView>
+    </FrameLayout>
+</LinearLayout>

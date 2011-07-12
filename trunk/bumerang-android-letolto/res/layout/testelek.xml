@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+    <TextView android:textSize="16dp" android:textColor="#FFFFFF" android:text="Videók" android:layout_height="wrap_content" android:shadowDx="1" android:shadowRadius="1.5" android:layout_width="fill_parent" android:id="@+id/textView2" android:shadowDy="1" android:shadowColor="#000000" android:background="@drawable/button_bg"></TextView>
+    
+</LinearLayout>

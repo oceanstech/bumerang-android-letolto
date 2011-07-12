@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="wrap_content" android:layout_height="wrap_content" android:drawableLeft="@drawable/video" android:text="Videók" android:textColor="#FFFFFF" android:padding="5dp" android:background="@drawable/child_button_bg" android:textSize="16dip">
+    
+</Button>
