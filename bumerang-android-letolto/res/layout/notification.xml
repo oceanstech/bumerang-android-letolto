@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="horizontal" android:gravity="center_vertical">
+    <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/icon"></ImageView>
+    <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout1" android:layout_height="fill_parent">
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="TextView" android:layout_alignParentLeft="true" android:id="@+id/title" android:textColor="#FFFFFFFF" android:shadowDx="2" android:shadowDy="2" android:shadowRadius="1.5" android:shadowColor="#FF000000" android:padding="4dp"></TextView>
+        <ProgressBar android:id="@+id/progressBar1" android:layout_height="wrap_content" android:layout_width="fill_parent" style="?android:attr/progressBarStyleHorizontal" android:layout_below="@+id/title" android:layout_alignLeft="@+id/title" android:maxHeight="5dp" android:minHeight="5dp" android:padding="2dp"></ProgressBar>
+        <TextView android:layout_height="wrap_content" android:padding="4dp" android:id="@+id/percent" android:layout_width="wrap_content" android:text="TextView" android:layout_above="@+id/progressBar1" android:layout_alignRight="@+id/progressBar1"></TextView>
+        <TextView android:layout_height="wrap_content" android:id="@+id/text" android:layout_width="fill_parent" android:text="TextView" android:layout_below="@+id/progressBar1" android:layout_alignLeft="@+id/progressBar1" android:padding="2dp" android:singleLine="true" android:ellipsize="marquee" android:marqueeRepeatLimit="marquee_forever" android:scrollHorizontally="true" android:focusable="true" android:focusableInTouchMode="true" android:textColor="#FFFFFFFF" android:shadowDx="2" android:shadowDy="2" android:shadowRadius="2.5" android:shadowColor="#000000"></TextView>
+    </RelativeLayout>
+    
+</LinearLayout>

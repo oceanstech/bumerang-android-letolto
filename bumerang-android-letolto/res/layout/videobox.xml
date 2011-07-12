@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:id="@+id/relativeLayout1" android:layout_height="wrap_content">
+    <TextView android:layout_height="wrap_content" android:layout_width="fill_parent" android:shadowDx="2" android:shadowColor="#000000" android:shadowRadius="1.5" android:id="@+id/textView1" android:shadowDy="2" android:text="Videók" android:textColor="#FFFFFF" android:textSize="23dp" android:background="@drawable/videobox_header_bg"></TextView>
+    <HorizontalScrollView android:id="@+id/horizontalScrollView1" android:padding="3dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/textView1" android:layout_alignLeft="@+id/textView1" android:layout_alignRight="@+id/textView1" android:background="@drawable/video_bg">
+        <LinearLayout android:id="@+id/videoscroll_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal"></LinearLayout>
+    </HorizontalScrollView>
+</RelativeLayout>

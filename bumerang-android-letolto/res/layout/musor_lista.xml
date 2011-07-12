@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical">
+        <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="fill_parent">
+            <Button android:layout_weight="50" android:layout_width="fill_parent" android:onClick="Back" android:id="@+id/button1" android:layout_height="wrap_content" android:text="Előző hónap" android:textColor="#FFFFFFFF" android:shadowColor="#000000" android:shadowDx="2" android:shadowDy="2" android:shadowRadius="1.5" android:textSize="17dp" android:background="@drawable/headerbutton_bg"></Button>
+            <Button android:id="@+id/button2" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="50" android:onClick="Forward" android:text="Következő hónap" android:textColor="#FFFFFFFF" android:textSize="17dp" android:shadowColor="#000000" android:shadowDx="2" android:shadowDy="2" android:shadowRadius="1.5" android:background="@drawable/headerbutton_bg"></Button>
+        </LinearLayout>
+        <ListView android:layout_width="fill_parent" android:id="@+id/listView1" android:layout_height="fill_parent"></ListView>
+    </LinearLayout>
+    

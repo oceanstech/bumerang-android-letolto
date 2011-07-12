@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+    <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout1" android:layout_height="fill_parent">
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentLeft="true" android:textColor="#FFFFFFFF" android:shadowDx="2" android:shadowDy="2" android:shadowRadius="1.5" android:shadowColor="#FF000000" android:padding="4dp" android:id="@+id/finished" android:text=" adás letöltése befejezve.."></TextView>
+        <TextView android:id="@+id/textView1" android:text="Meghallgatáshoz kattints ide..." android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/finished" android:layout_alignLeft="@+id/finished"></TextView>
+    </RelativeLayout>
+    
+</LinearLayout>
