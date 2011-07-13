@@ -24,6 +24,8 @@ import org.jaudiotagger.tag.KeyNotFoundException;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.TagOptionSingleton;
+import org.jaudiotagger.tag.datatype.Artwork;
+import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
 
 
 
@@ -32,6 +34,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -306,15 +309,21 @@ public class Downloader extends Thread {
 		new DefaultHttpClient().execute(new HttpGet(url))
         .getEntity().writeTo(
                 new FileOutputStream(mp3));*/
+			
+			TagOptionSingleton.getInstance().setAndroid(true);
 	    AudioFile af;
 		
 			af = AudioFileIO.read(mp3);
 		
 	    Tag tag = af.getTagOrCreateAndSetDefault();
-	 /*   
+	
 	    
 	    Artwork a = new Artwork();
-	    InputStream is = getAssets().open("bumcov.jpg"); 
+	    
+	    
+	    AssetFileDescriptor file = context.getAssets().openFd("bumcov.jpg");
+	    
+	    InputStream is= file.createInputStream();
 	   
             // We guarantee that the available method returns the total
             // size of the asset...  of course, this does mean that a single
@@ -323,17 +332,19 @@ public class Downloader extends Thread {
 
             // Read the entire asset into a local byte buffer.
             byte[] image_buffer = new byte[size];
-            is.read(buffer);
+            is.read(image_buffer);
             is.close();
           
          //   a.setImageUrl("http://www.vivatv.hu/gsp/images/bumerang_logo_supyo_293x195.jpg");
-	
+            String mimetype = ImageFormats.getMimeTypeForBinarySignature(image_buffer);
+     	   a.setMimeType(mimetype);
 	   a.setBinaryData(image_buffer);
+	  
 	  
 	    
 	   
-	    tag.setField(a);
-	    */
+	    tag.addField(a);
+	    
 	    
 	    TagOptionSingleton.getInstance().setAndroid(true);
 	    
