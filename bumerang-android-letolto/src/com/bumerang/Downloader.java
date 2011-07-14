@@ -32,9 +32,11 @@ import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -44,6 +46,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StatFs;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 
 public class Downloader extends Thread {
@@ -76,7 +79,7 @@ public class Downloader extends Thread {
 				 notifyDetails.contentIntent = contentIntent;
 				// notifyDetails.setLatestEventInfo(getApplicationContext(), msg.getData().getString("title"), msg.getData().getString("text"), contentIntent);
 				 contentView = new RemoteViews(context.getPackageName(), R.layout.error_notification);
-				 contentView.setTextViewText(R.id.error_message, "Tag-ek írása nem sikerült...");
+				 contentView.setTextViewText(R.id.error_message, "Tag-ek í­rása nem sikerült...");
 				 notifyDetails.contentView = contentView;
 				 
 				 mManager.notify(2, notifyDetails);
@@ -198,6 +201,25 @@ public class Downloader extends Thread {
 		else 
 			{
 			MusorDownload(this.musor);
+			ContentValues initialValues = new ContentValues();
+			initialValues.put(MUSOROKContentProvider.CIM, this.musor.getTitle());
+			initialValues.put(MUSOROKContentProvider.MUSOR_ID, Integer.valueOf(this.musor.getDate().concat(String.valueOf(this.musor.getId()))));
+			context.getContentResolver().insert(Uri.parse("content://com.bumerang.musorokcontentprovider/musorok"), initialValues);
+			
+			
+			Uri allTitles = Uri.parse(
+		      "content://com.bumerang.musorokcontentprovider/musorok");
+		   Cursor c = context.getContentResolver().query(allTitles, null, null, null, "musor_id desc");
+		   if (c.moveToFirst()) {
+		      do{
+		         String s =   c.getString(c.getColumnIndex(
+		            		MUSOROKContentProvider.MUSOR_ID)) + ", " +                     
+		            c.getString(c.getColumnIndex(
+		            		MUSOROKContentProvider.CIM));    
+		         
+		         s.charAt(0);
+		      } while (c.moveToNext());
+		   }
 			}
 		context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse
 	    		("file://"
@@ -213,7 +235,7 @@ public class Downloader extends Thread {
 		FileOutputStream f;
    	 
 		Bundle b = new Bundle();
-	    b.putString("title", (m.getId())+"/"+m.getFrom()+". letöltése...");
+	    b.putString("title", (m.getId())+"/"+m.getFrom()+". letötése...");
 	    b.putString("text",m.getTime()+" "+m.getTitle());
 	    Message message = new Message();
 	    message.setData(b);
@@ -412,6 +434,7 @@ public class Downloader extends Thread {
 			 if(!(new File(m.getDirectory(),m.getDate()+"_"+m.getId()+".mp3").exists()))
 			 {
 			MusorDownload(m);
+			
 			 }
 		}
 		
