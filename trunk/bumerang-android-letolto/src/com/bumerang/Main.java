@@ -240,6 +240,32 @@ public class Main extends Activity {
 		
 		buttons.add(button);
 		
+		button = (Button) infalInflater.inflate(R.layout.selector_button, null);
+		button.setText("Segítség a játékokhoz");
+
+		
+		
+		button.setOnClickListener(new OnClickListener(){
+		
+			public void onClick(View v) {
+				Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+			      
+				  Uri u = Uri.parse("http://www.ustream.tv/mobile/view/channel/6926046");
+			        intent.setData(u);
+			        
+			      
+			        
+			        
+			       v.getContext().startActivity(intent);
+				
+				
+			}
+			
+		});
+		
+		
+		buttons.add(button);
+		
 		SelectorDialog d = new SelectorDialog(v.getContext(),"Csatornák",buttons);
 		
 		d.show();
