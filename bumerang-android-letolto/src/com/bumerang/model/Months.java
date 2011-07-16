@@ -1,4 +1,4 @@
-package com.bumerang;
+package com.bumerang.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;

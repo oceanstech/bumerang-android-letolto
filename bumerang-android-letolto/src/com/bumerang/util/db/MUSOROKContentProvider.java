@@ -10,7 +10,7 @@
  * in your installation folder.                                               *
  ******************************************************************************
  */
-package com.bumerang;
+package com.bumerang.util.db;
 
 import java.util.*;
 
@@ -35,34 +35,30 @@ public class MUSOROKContentProvider extends ContentProvider {
 			+ AUTHORITY + "/" + TABLE_NAME.toLowerCase() + "/musor_id");
 	public static final Uri CIM_FIELD_CONTENT_URI = Uri.parse("content://"
 			+ AUTHORITY + "/" + TABLE_NAME.toLowerCase() + "/cim");
-	public static final Uri SZOVEG_FIELD_CONTENT_URI = Uri.parse("content://"
-			+ AUTHORITY + "/" + TABLE_NAME.toLowerCase() + "/szoveg");
 	public static final Uri FILE_FIELD_CONTENT_URI = Uri.parse("content://"
 			+ AUTHORITY + "/" + TABLE_NAME.toLowerCase() + "/file");
-	public static final Uri DATUM_FIELD_CONTENT_URI = Uri.parse("content://"
-			+ AUTHORITY + "/" + TABLE_NAME.toLowerCase() + "/datum");
-	public static final Uri IDOPONT_FIELD_CONTENT_URI = Uri.parse("content://"
-			+ AUTHORITY + "/" + TABLE_NAME.toLowerCase() + "/idopont");
+	public static final Uri DAY_FIELD_CONTENT_URI = Uri.parse("content://"
+			+ AUTHORITY + "/" + TABLE_NAME.toLowerCase() + "/day");
+	public static final Uri SORSZAM_FIELD_CONTENT_URI = Uri.parse("content://"
+			+ AUTHORITY + "/" + TABLE_NAME.toLowerCase() + "/sorszam");
 
-	public static final String DEFAULT_SORT_ORDER = "musor_id ASC";
+	public static final String DEFAULT_SORT_ORDER = "MUSOR_ID ASC";
 
 	private static final UriMatcher URL_MATCHER;
 
 	private static final int MUSOROK = 1;
 	private static final int MUSOROK_MUSOR_ID = 2;
 	private static final int MUSOROK_CIM = 3;
-	private static final int MUSOROK_SZOVEG = 4;
-	private static final int MUSOROK_FILE = 5;
-	private static final int MUSOROK_DATUM = 6;
-	private static final int MUSOROK_IDOPONT = 7;
+	private static final int MUSOROK_FILE = 4;
+	private static final int MUSOROK_DAY = 5;
+	private static final int MUSOROK_SORSZAM = 6;
 
 	// Content values keys (using column names)
-	public static final String MUSOR_ID = "musor_id";
+	public static final String MUSOR_ID = "MUSOR_ID";
 	public static final String CIM = "cim";
-	public static final String SZOVEG = "szoveg";
 	public static final String FILE = "file";
-	public static final String DATUM = "datum";
-	public static final String IDOPONT = "idopont";
+	public static final String DAY = "day";
+	public static final String SORSZAM = "sorszam";
 
 	public boolean onCreate() {
 		dbHelper = new MusorDBHelper(getContext(), true);
@@ -86,21 +82,17 @@ public class MUSOROKContentProvider extends ContentProvider {
 			qb.setTables(TABLE_NAME);
 			qb.appendWhere("cim='" + url.getPathSegments().get(2) + "'");
 			break;
-		case MUSOROK_SZOVEG:
-			qb.setTables(TABLE_NAME);
-			qb.appendWhere("szoveg='" + url.getPathSegments().get(2) + "'");
-			break;
 		case MUSOROK_FILE:
 			qb.setTables(TABLE_NAME);
 			qb.appendWhere("file='" + url.getPathSegments().get(2) + "'");
 			break;
-		case MUSOROK_DATUM:
+		case MUSOROK_DAY:
 			qb.setTables(TABLE_NAME);
-			qb.appendWhere("datum='" + url.getPathSegments().get(2) + "'");
+			qb.appendWhere("day='" + url.getPathSegments().get(2) + "'");
 			break;
-		case MUSOROK_IDOPONT:
+		case MUSOROK_SORSZAM:
 			qb.setTables(TABLE_NAME);
-			qb.appendWhere("idopont='" + url.getPathSegments().get(2) + "'");
+			qb.appendWhere("sorszam='" + url.getPathSegments().get(2) + "'");
 			break;
 
 		default:
@@ -126,13 +118,11 @@ public class MUSOROKContentProvider extends ContentProvider {
 			return "vnd.android.cursor.item/vnd.com.bumerang.musorok";
 		case MUSOROK_CIM:
 			return "vnd.android.cursor.item/vnd.com.bumerang.musorok";
-		case MUSOROK_SZOVEG:
-			return "vnd.android.cursor.item/vnd.com.bumerang.musorok";
 		case MUSOROK_FILE:
 			return "vnd.android.cursor.item/vnd.com.bumerang.musorok";
-		case MUSOROK_DATUM:
+		case MUSOROK_DAY:
 			return "vnd.android.cursor.item/vnd.com.bumerang.musorok";
-		case MUSOROK_IDOPONT:
+		case MUSOROK_SORSZAM:
 			return "vnd.android.cursor.item/vnd.com.bumerang.musorok";
 
 		default:
@@ -186,14 +176,6 @@ public class MUSOROKContentProvider extends ContentProvider {
 							+ (!TextUtils.isEmpty(where) ? " AND (" + where
 									+ ')' : ""), whereArgs);
 			break;
-		case MUSOROK_SZOVEG:
-			segment = "'" + url.getPathSegments().get(2) + "'";
-			count = mDB.delete(TABLE_NAME,
-					"szoveg="
-							+ segment
-							+ (!TextUtils.isEmpty(where) ? " AND (" + where
-									+ ')' : ""), whereArgs);
-			break;
 		case MUSOROK_FILE:
 			segment = "'" + url.getPathSegments().get(2) + "'";
 			count = mDB.delete(TABLE_NAME,
@@ -202,18 +184,18 @@ public class MUSOROKContentProvider extends ContentProvider {
 							+ (!TextUtils.isEmpty(where) ? " AND (" + where
 									+ ')' : ""), whereArgs);
 			break;
-		case MUSOROK_DATUM:
+		case MUSOROK_DAY:
 			segment = "'" + url.getPathSegments().get(2) + "'";
 			count = mDB.delete(TABLE_NAME,
-					"datum="
+					"day="
 							+ segment
 							+ (!TextUtils.isEmpty(where) ? " AND (" + where
 									+ ')' : ""), whereArgs);
 			break;
-		case MUSOROK_IDOPONT:
+		case MUSOROK_SORSZAM:
 			segment = "'" + url.getPathSegments().get(2) + "'";
 			count = mDB.delete(TABLE_NAME,
-					"idopont="
+					"sorszam="
 							+ segment
 							+ (!TextUtils.isEmpty(where) ? " AND (" + where
 									+ ')' : ""), whereArgs);
@@ -251,14 +233,6 @@ public class MUSOROKContentProvider extends ContentProvider {
 							+ (!TextUtils.isEmpty(where) ? " AND (" + where
 									+ ')' : ""), whereArgs);
 			break;
-		case MUSOROK_SZOVEG:
-			segment = "'" + url.getPathSegments().get(2) + "'";
-			count = mDB.update(TABLE_NAME, values,
-					"szoveg="
-							+ segment
-							+ (!TextUtils.isEmpty(where) ? " AND (" + where
-									+ ')' : ""), whereArgs);
-			break;
 		case MUSOROK_FILE:
 			segment = "'" + url.getPathSegments().get(2) + "'";
 			count = mDB.update(TABLE_NAME, values,
@@ -267,18 +241,18 @@ public class MUSOROKContentProvider extends ContentProvider {
 							+ (!TextUtils.isEmpty(where) ? " AND (" + where
 									+ ')' : ""), whereArgs);
 			break;
-		case MUSOROK_DATUM:
+		case MUSOROK_DAY:
 			segment = "'" + url.getPathSegments().get(2) + "'";
 			count = mDB.update(TABLE_NAME, values,
-					"datum="
+					"day="
 							+ segment
 							+ (!TextUtils.isEmpty(where) ? " AND (" + where
 									+ ')' : ""), whereArgs);
 			break;
-		case MUSOROK_IDOPONT:
+		case MUSOROK_SORSZAM:
 			segment = "'" + url.getPathSegments().get(2) + "'";
 			count = mDB.update(TABLE_NAME, values,
-					"idopont="
+					"sorszam="
 							+ segment
 							+ (!TextUtils.isEmpty(where) ? " AND (" + where
 									+ ')' : ""), whereArgs);
@@ -298,22 +272,19 @@ public class MUSOROKContentProvider extends ContentProvider {
 				+ "/*", MUSOROK_MUSOR_ID);
 		URL_MATCHER.addURI(AUTHORITY, TABLE_NAME.toLowerCase() + "/cim" + "/*",
 				MUSOROK_CIM);
-		URL_MATCHER.addURI(AUTHORITY, TABLE_NAME.toLowerCase() + "/szoveg"
-				+ "/*", MUSOROK_SZOVEG);
 		URL_MATCHER.addURI(AUTHORITY,
 				TABLE_NAME.toLowerCase() + "/file" + "/*", MUSOROK_FILE);
-		URL_MATCHER.addURI(AUTHORITY, TABLE_NAME.toLowerCase() + "/datum"
-				+ "/*", MUSOROK_DATUM);
-		URL_MATCHER.addURI(AUTHORITY, TABLE_NAME.toLowerCase() + "/idopont"
-				+ "/*", MUSOROK_IDOPONT);
+		URL_MATCHER.addURI(AUTHORITY, TABLE_NAME.toLowerCase() + "/day" + "/*",
+				MUSOROK_DAY);
+		URL_MATCHER.addURI(AUTHORITY, TABLE_NAME.toLowerCase() + "/sorszam"
+				+ "/*", MUSOROK_SORSZAM);
 
 		MUSOROK_PROJECTION_MAP = new HashMap<String, String>();
 		MUSOROK_PROJECTION_MAP.put(MUSOR_ID, "musor_id");
 		MUSOROK_PROJECTION_MAP.put(CIM, "cim");
-		MUSOROK_PROJECTION_MAP.put(SZOVEG, "szoveg");
 		MUSOROK_PROJECTION_MAP.put(FILE, "file");
-		MUSOROK_PROJECTION_MAP.put(DATUM, "datum");
-		MUSOROK_PROJECTION_MAP.put(IDOPONT, "idopont");
+		MUSOROK_PROJECTION_MAP.put(DAY, "day");
+		MUSOROK_PROJECTION_MAP.put(SORSZAM, "sorszam");
 
 	}
 }

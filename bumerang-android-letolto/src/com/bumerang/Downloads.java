@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import org.apache.http.client.ClientProtocolException;
+
+import com.bumerang.model.Day;
+import com.bumerang.model.Downloader;
+import com.bumerang.model.Musor;
+import com.bumerang.util.ExpandableMusorListaAdapter;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -30,8 +36,8 @@ public class Downloads extends Activity {
 
 	String DateUrl;
 	private ExpandableMusorListaAdapter adapter;
-	static final  String BaseUrl = "http://bumerang.hu/?ezaz=2_";
-	static final  String REGEXP = "<p align=\"justify\">(.+?)</p>";
+	static final String BaseUrl = "http://bumerang.hu/?ezaz=2_";
+	static final String REGEXP = "<p align=\"justify\">(.+?)</p>";
 	static final String REGEXP_MP3 = "http://s.bumerang.hu(.+?).mp3";
 	static final String REGEXP_IMAGE = "<img src=\"hirkep/kicsi/(.+?)\" width=\"102\" height=\"252\" align=\"left\" />";
 	Locale Magyar = new Locale("hu","HU");

@@ -11,6 +11,10 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.bumerang.dialogs.Info;
+import com.bumerang.dialogs.SelectorDialog;
+
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;

@@ -1,6 +1,14 @@
-package com.bumerang;
+package com.bumerang.dialogs;
 
 import java.util.HashMap;
+
+import com.bumerang.R;
+import com.bumerang.R.drawable;
+import com.bumerang.R.id;
+import com.bumerang.R.layout;
+import com.bumerang.R.style;
+import com.bumerang.model.Musor;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;

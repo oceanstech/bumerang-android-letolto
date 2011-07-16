@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import org.apache.http.client.ClientProtocolException;
+
+import com.bumerang.model.FileManager;
+import com.bumerang.model.Months;
+import com.bumerang.util.NaptarListaAdapter;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
