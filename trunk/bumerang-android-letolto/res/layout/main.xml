@@ -31,5 +31,13 @@
             <TextView android:shadowColor="#000000" android:clickable="false" android:focusable="false" android:layout_height="wrap_content" android:onClick="ustream" android:layout_width="fill_parent" android:id="@+id/textView4" android:shadowRadius="2.5" android:textSize="20dip" android:text="Archívum" android:textColor="#FFFFFF" android:shadowDx="2" android:shadowDy="2" android:padding="5dip" android:layout_margin="5dip" android:layout_toRightOf="@+id/imageView6" android:layout_alignTop="@+id/imageView6" android:layout_alignBottom="@+id/imageView6" android:gravity="center_vertical|center_horizontal"></TextView>
         </RelativeLayout>
     </LinearLayout>
+    
+     <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout5" android:layout_height="wrap_content" android:layout_margin="10dip" android:clickable="true" android:focusable="true" android:onClick="GoToFiles" android:background="@drawable/main_button_bg">
+        <RelativeLayout android:layout_width="wrap_content" android:focusable="false" android:clickable="false" android:id="@+id/relativeLayout5" android:layout_height="fill_parent">
+            <ImageView android:layout_height="wrap_content" android:id="@+id/imageView8"  android:clickable="false" android:focusable="false" android:src="@drawable/files" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></ImageView>
+            <ImageView android:layout_height="wrap_content" android:id="@+id/imageView9"  android:clickable="false" android:focusable="false" android:src="@drawable/vertical_main_separator" android:layout_width="wrap_content" android:layout_toRightOf="@+id/imageView8" android:layout_alignTop="@+id/imageView8" android:layout_alignBottom="@+id/imageView8"></ImageView>
+            <TextView android:shadowColor="#000000" android:clickable="false" android:focusable="false" android:layout_height="wrap_content" android:onClick="ustream" android:layout_width="fill_parent" android:id="@+id/textView5" android:shadowRadius="2.5" android:textSize="20dip" android:text="Letöltések" android:textColor="#FFFFFF" android:shadowDx="2" android:shadowDy="2" android:padding="5dip" android:layout_margin="5dip" android:layout_toRightOf="@+id/imageView8" android:layout_alignTop="@+id/imageView8" android:layout_alignBottom="@+id/imageView8" android:gravity="center_vertical|center_horizontal"></TextView>
+        </RelativeLayout>
+    </LinearLayout>
   
 </LinearLayout>
