@@ -40,23 +40,18 @@ public class Files extends Activity {
 	{
 		 StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
 		 FileManager fm = FileManager.getInstance();
-		 long all_block = stat.getBlockCount();
-		 long block_size = stat.getBlockSize();
-		 long available_space = stat.getAvailableBlocks()*stat.getBlockSize();
-		 long bumerang_space = dirSize(new File(fm.getDirectory()));
-		 long left_space=all_block*block_size;
+		
+		 long available_space = stat.getAvailableBlocks();
+		 long bumerang_space = dirSize(new File(fm.getDirectory()))/stat.getBlockSize();
+		 long left_space=stat.getBlockCount();
 		 
-		 TextView bum_space = (TextView) this.findViewById(R.id.bumerang_space);
-		 TextView other_space = (TextView) this.findViewById(R.id.other_space);
 		 TextView free_space = (TextView) this.findViewById(R.id.free_space);
 		 
-		 float bum_mb = bumerang_space/(1024*1024);
-		 float other_mb = (left_space-bumerang_space-available_space)/(1024*1024);
-		 float free_mb = available_space/(1024*1024);
-		 
-		 bum_space.setText(bum_space.getText()+" "+bum_mb+" MB");
-		 other_space.setText(other_space.getText()+" "+other_mb+" MB");
-		 free_space.setText(free_space.getText()+" "+free_mb+" MB");
+		 long bum_mb =  ((bumerang_space*stat.getBlockSize())/(1024*1024));
+		 long other_mb =  (((left_space-bumerang_space-available_space)*stat.getBlockSize())/(1024*1024));
+		 long free_mb =  ((available_space*stat.getBlockSize())/(1024*1024));
+		
+		 free_space.setText(free_space.getText()+" "+bum_mb+"/"+other_mb+"/"+free_mb+" MB");
 		 
 		 ImageView bum_bar = (ImageView) this.findViewById(R.id.bumerang_bar);
 		 ImageView other_bar = (ImageView) this.findViewById(R.id.other_bar);
