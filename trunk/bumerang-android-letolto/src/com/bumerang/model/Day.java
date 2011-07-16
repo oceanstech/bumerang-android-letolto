@@ -1,4 +1,4 @@
-package com.bumerang;
+package com.bumerang.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +14,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.bumerang.util.NCRDecoder;
 
 public class Day {
 	

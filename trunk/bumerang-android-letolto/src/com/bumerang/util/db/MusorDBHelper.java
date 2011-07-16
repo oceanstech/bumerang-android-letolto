@@ -10,7 +10,7 @@
  * in your installation folder.                                               *
  ******************************************************************************
  */
-package com.bumerang;
+package com.bumerang.util.db;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

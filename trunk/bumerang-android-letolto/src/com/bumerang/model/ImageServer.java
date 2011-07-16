@@ -1,4 +1,4 @@
-package com.bumerang;
+package com.bumerang.model;
 
 import java.io.BufferedInputStream;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.bumerang;
+package com.bumerang.dialogs;
 
 
 import java.io.BufferedReader;
@@ -11,6 +11,11 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.bumerang.R;
+import com.bumerang.R.id;
+import com.bumerang.R.layout;
+import com.bumerang.R.style;
 
 
 import android.app.Dialog;

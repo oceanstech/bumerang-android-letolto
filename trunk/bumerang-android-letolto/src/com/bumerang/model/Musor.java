@@ -1,4 +1,4 @@
-package com.bumerang;
+package com.bumerang.model;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.bumerang.util.NCRDecoder;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

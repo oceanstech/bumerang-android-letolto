@@ -1,4 +1,4 @@
-package com.bumerang;
+package com.bumerang.model;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,6 +26,12 @@ import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.TagOptionSingleton;
 import org.jaudiotagger.tag.datatype.Artwork;
 import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
+
+import com.bumerang.R;
+import com.bumerang.R.drawable;
+import com.bumerang.R.id;
+import com.bumerang.R.layout;
+import com.bumerang.util.db.MUSOROKContentProvider;
 
 
 
@@ -196,30 +202,12 @@ public class Downloader extends Thread {
 		if(musor==null && day!=null) 
 			{
 			DayDownload();
-			 
+						 
 			}
 		else 
 			{
 			MusorDownload(this.musor);
-			ContentValues initialValues = new ContentValues();
-			initialValues.put(MUSOROKContentProvider.CIM, this.musor.getTitle());
-			initialValues.put(MUSOROKContentProvider.MUSOR_ID, Integer.valueOf(this.musor.getDate().concat(String.valueOf(this.musor.getId()))));
-			context.getContentResolver().insert(Uri.parse("content://com.bumerang.musorokcontentprovider/musorok"), initialValues);
 			
-			
-			Uri allTitles = Uri.parse(
-		      "content://com.bumerang.musorokcontentprovider/musorok");
-		   Cursor c = context.getContentResolver().query(allTitles, null, null, null, "musor_id desc");
-		   if (c.moveToFirst()) {
-		      do{
-		         String s =   c.getString(c.getColumnIndex(
-		            		MUSOROKContentProvider.MUSOR_ID)) + ", " +                     
-		            c.getString(c.getColumnIndex(
-		            		MUSOROKContentProvider.CIM));    
-		         
-		         s.charAt(0);
-		      } while (c.moveToNext());
-		   }
 			}
 		context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse
 	    		("file://"
@@ -227,6 +215,8 @@ public class Downloader extends Thread {
 
 	}
 	
+	
+
 	@SuppressWarnings("static-access")
 	private void MusorDownload(Musor m)
 	{
@@ -318,20 +308,7 @@ public class Downloader extends Thread {
 	    
 			f.close();
 		
-	   /*
-		String DayDirectory = Environment.getExternalStorageDirectory()+"/bumerang/"+DateUrl;
-		
-		if(!(new File(DayDirectory).exists()))
-    	 {
-    		 new File(DayDirectory).mkdirs();
-    	 }
-		String url = "http://bumerang.hu/letolt.php?ev="+DateUrl.substring(0, 4)+"&ho="+Integer.valueOf(DateUrl.substring(4, 6))+"&nap="+Integer.valueOf(DateUrl.substring(6, 8))+"&sorszam="+(i+1);
-		
-		 File mp3 = new File(DayDirectory,DateUrl+"_"+(i+1)+".mp3");
-		new DefaultHttpClient().execute(new HttpGet(url))
-        .getEntity().writeTo(
-                new FileOutputStream(mp3));*/
-			
+	   			
 			TagOptionSingleton.getInstance().setAndroid(true);
 	    AudioFile af;
 		
@@ -362,8 +339,6 @@ public class Downloader extends Thread {
      	   a.setMimeType(mimetype);
 	   a.setBinaryData(image_buffer);
 	  
-	  
-	    
 	   
 	    tag.addField(a);
 	    
@@ -381,6 +356,15 @@ public class Downloader extends Thread {
 	    tag.setField(FieldKey.TRACK_TOTAL,String.valueOf(m.getFrom()));
 	    				   
 	    af.commit();
+	    
+	    ContentValues initialValues = new ContentValues();
+		initialValues.put(MUSOROKContentProvider.CIM, m.getTitle());
+		initialValues.put(MUSOROKContentProvider.DAY, m.getDate());
+		initialValues.put(MUSOROKContentProvider.SORSZAM, m.getId());
+		initialValues.put(MUSOROKContentProvider.FILE, m.getDirectory()+"/"+m.getDate()+"_"+(m.getId())+".mp3");
+		initialValues.put(MUSOROKContentProvider.MUSOR_ID, Integer.valueOf(m.getDate().concat(String.valueOf(m.getId()))));
+		context.getContentResolver().insert(Uri.parse("content://com.bumerang.musorokcontentprovider/musorok"), initialValues);
+	    
 	    } catch (KeyNotFoundException e) {
 			delete(m);
 			handler.sendEmptyMessage(this.JAUDIOTAGGER_PROBLEM);

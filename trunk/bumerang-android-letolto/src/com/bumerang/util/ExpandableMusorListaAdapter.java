@@ -1,6 +1,16 @@
-package com.bumerang;
+package com.bumerang.util;
 
 import java.util.ArrayList;
+
+import com.bumerang.R;
+import com.bumerang.R.drawable;
+import com.bumerang.R.id;
+import com.bumerang.R.layout;
+import com.bumerang.dialogs.VideoGalleryDialog;
+import com.bumerang.model.Downloader;
+import com.bumerang.model.FileManager;
+import com.bumerang.model.Musor;
+
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;

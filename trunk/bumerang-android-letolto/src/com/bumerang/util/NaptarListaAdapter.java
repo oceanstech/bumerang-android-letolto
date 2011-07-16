@@ -1,9 +1,13 @@
-package com.bumerang;
+package com.bumerang.util;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+
+import com.bumerang.R;
+import com.bumerang.R.id;
+import com.bumerang.R.layout;
 
 import android.content.Context;
 import android.view.LayoutInflater;
