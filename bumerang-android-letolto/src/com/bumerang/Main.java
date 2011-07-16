@@ -217,6 +217,7 @@ public class Main extends Activity {
 			
 		});
 		
+		
 		buttons.add(button);
 		button = (Button) infalInflater.inflate(R.layout.selector_button, null);
 		button.setText("Műsorvezetők");
@@ -275,6 +276,12 @@ public class Main extends Activity {
 		d.show();
 		
 		  
+	}
+	
+	public void GoToFiles(View v)
+	{
+		Intent intent = new Intent().setClass(this, Files.class);
+		startActivity(intent);
 	}
 	
 

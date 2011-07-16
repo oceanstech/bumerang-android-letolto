@@ -8,6 +8,10 @@ public class FileManager {
 	
 	final static String directory = Environment.getExternalStorageDirectory().getAbsolutePath()+"/bumerang/";
 	
+	public static String getDirectory() {
+		return directory;
+	}
+
 	private static FileManager instance;
 	
 	private FileManager()
