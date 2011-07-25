@@ -35,13 +35,7 @@ public class ImageServer {
 	
 	public Bitmap getImage(String url)
 	{
-		String [] url_split = url.split("/");
-		String filename = url_split[url_split.length-1];
-	/*	Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/bumerang/cache/"+filename);
-		if(bitmap!=null) 
-		return bitmap;*/
 			
-		
 			 Bitmap bm = null; 
 		        
 		            URL aURL;

@@ -4,10 +4,6 @@ package com.bumerang.dialogs;
 import java.util.ArrayList;
 
 import com.bumerang.R;
-import com.bumerang.R.id;
-import com.bumerang.R.layout;
-import com.bumerang.R.style;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Window;

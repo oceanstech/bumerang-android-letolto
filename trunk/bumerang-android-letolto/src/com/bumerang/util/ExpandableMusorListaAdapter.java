@@ -3,9 +3,6 @@ package com.bumerang.util;
 import java.util.ArrayList;
 
 import com.bumerang.R;
-import com.bumerang.R.drawable;
-import com.bumerang.R.id;
-import com.bumerang.R.layout;
 import com.bumerang.dialogs.VideoGalleryDialog;
 import com.bumerang.model.Downloader;
 import com.bumerang.model.FileManager;
@@ -23,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 
