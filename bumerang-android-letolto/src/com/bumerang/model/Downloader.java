@@ -28,21 +28,12 @@ import org.jaudiotagger.tag.datatype.Artwork;
 import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
 
 import com.bumerang.R;
-import com.bumerang.R.drawable;
-import com.bumerang.R.id;
-import com.bumerang.R.layout;
-import com.bumerang.util.db.MUSOROKContentProvider;
-
-
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -52,7 +43,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StatFs;
 import android.widget.RemoteViews;
-import android.widget.Toast;
+
 
 
 public class Downloader extends Thread {
@@ -357,14 +348,7 @@ public class Downloader extends Thread {
 	    				   
 	    af.commit();
 	    
-	    ContentValues initialValues = new ContentValues();
-		initialValues.put(MUSOROKContentProvider.CIM, m.getTitle());
-		initialValues.put(MUSOROKContentProvider.DAY, m.getDate());
-		initialValues.put(MUSOROKContentProvider.SORSZAM, m.getId());
-		initialValues.put(MUSOROKContentProvider.FILE, m.getDirectory()+"/"+m.getDate()+"_"+(m.getId())+".mp3");
-		initialValues.put(MUSOROKContentProvider.MUSOR_ID, Integer.valueOf(m.getDate().concat(String.valueOf(m.getId()))));
-		context.getContentResolver().insert(Uri.parse("content://com.bumerang.musorokcontentprovider/musorok"), initialValues);
-	    
+	   
 	    } catch (KeyNotFoundException e) {
 			delete(m);
 			handler.sendEmptyMessage(this.JAUDIOTAGGER_PROBLEM);
