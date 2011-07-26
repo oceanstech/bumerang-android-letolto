@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 
@@ -99,7 +100,8 @@ public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 
 			public void onClick(View v) {
 			Downloader dt = new Downloader(context,data);
-			dt.start();
+			DownloadThreadQueue.getInstance().execute(dt);
+			Toast.makeText(v.getContext(), "Egy elem hozzáadva a letöltési listához.", 50000).show();
 		}});
 	    ll.addView(download);
 	}
