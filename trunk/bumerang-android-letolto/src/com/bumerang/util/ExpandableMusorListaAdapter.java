@@ -148,6 +148,7 @@ public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 			   
 			   public void onClick(View v) {
 			    VideoGalleryDialog customizeDialog = new VideoGalleryDialog(context,data);
+			    customizeDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 			    customizeDialog.show();
 			   }
 			  });

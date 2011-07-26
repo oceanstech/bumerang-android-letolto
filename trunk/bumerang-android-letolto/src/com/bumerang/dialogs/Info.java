@@ -40,47 +40,13 @@ public class Info extends Dialog {
 	final Handler handler = new Handler() {
 		
 
+		private Button button;
+
 		public void handleMessage(Message msg) {
-			 if(msg.what==4){
-				
-				 l.removeAllViews();
-				 TextView tw = new TextView(context);
-					tw.setText("Verzió:"+this_version);
-					l.addView(tw);
-				
-				  
-				  Button button = (Button) infalInflater.inflate(R.layout.selector_button, null);
-					
-					
-					button.setText("Logout információs oldal");
-					button.setOnClickListener(new View.OnClickListener(){
-
-						public void onClick(View v) {
-							Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-						      
-							  Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
-						        intent.setData(u);
-						        				        
-						       v.getContext().startActivity(intent);
-							
-						}
-
-						
-						
-					});
-				 
-					  l.addView(button);
-					  
-					  
-					  button = (Button) infalInflater.inflate(R.layout.selector_button, null);
-						
-						
-						button.setText("Lekérdezés folyamatban...");
-						
-				
-						  l.addView(button);
-				
-				}
+			 if(msg.what==4)
+			 {				 
+				 CreateInformationDialog();
+			 }
 			 
 			 else if(msg.what==2){
 					
@@ -221,6 +187,47 @@ public class Info extends Dialog {
 			 
 				}
 	}
+
+		private void CreateInformationDialog() {
+			
+			
+			 l.removeAllViews();
+			 TextView tw = new TextView(context);
+				tw.setText("Verzió:"+this_version);
+				l.addView(tw);
+			
+				View.OnClickListener listener = new View.OnClickListener(){
+
+					public void onClick(View v) {
+						Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+					      
+						  Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
+					        intent.setData(u);
+					        				        
+					       v.getContext().startActivity(intent);
+						
+					}
+
+				};
+					
+				
+				
+			 createButton("Logout információs oldal",listener);
+			 
+			 createButton("Lekérdezés folyamatban...",null);
+				  		
+		}
+
+		private void createButton(String title,
+				android.view.View.OnClickListener listener) {
+			button = (Button) infalInflater.inflate(R.layout.selector_button, null);
+				
+				button.setText(title);
+				button.setOnClickListener(listener);
+			 
+				  l.addView(button);
+			
+		}
 	};
 	private Double this_version;
 	

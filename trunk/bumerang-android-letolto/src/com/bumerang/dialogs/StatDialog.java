@@ -47,12 +47,16 @@ public class StatDialog extends Dialog {
 		 long left_space=stat.getBlockCount();
 		 
 		 TextView free_space = (TextView) this.findViewById(R.id.free_space);
+		 TextView bum_space = (TextView) this.findViewById(R.id.bum_space);
+		 TextView other_space = (TextView) this.findViewById(R.id.other_space);
 		 
 		 long bum_mb =  ((bumerang_space*stat.getBlockSize())/(1024*1024));
 		 long other_mb =  (((left_space-bumerang_space-available_space)*stat.getBlockSize())/(1024*1024));
 		 long free_mb =  ((available_space*stat.getBlockSize())/(1024*1024));
 		
-		 free_space.setText(free_space.getText()+" "+bum_mb+"/"+other_mb+"/"+free_mb+" MB");
+		 free_space.setText(Long.toString(free_mb));
+		 bum_space.setText(Long.toString(bum_mb)+"/");
+		 other_space.setText(Long.toString(other_mb)+"/");
 		 
 		 ImageView bum_bar = (ImageView) this.findViewById(R.id.bumerang_bar);
 		 ImageView other_bar = (ImageView) this.findViewById(R.id.other_bar);

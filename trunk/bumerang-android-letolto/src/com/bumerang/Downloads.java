@@ -88,15 +88,9 @@ public class Downloads extends Activity {
 		 hiba = Toast.makeText(this, "Kapcsolati hiba!", 5000);
 		
 		DateUrl = this.getIntent().getStringExtra("Date");
-		
-		
-		
-		
-		  DayDirectory = Environment.getExternalStorageDirectory()+"/bumerang/"+DateUrl;
+		DayDirectory = Environment.getExternalStorageDirectory()+"/bumerang/"+DateUrl;
 		
 		adapter = new ExpandableMusorListaAdapter(this, new ArrayList<Musor>());
-		
-		
 		
 		TextView header = (TextView) findViewById(R.id.downloads_header);
 		
@@ -113,9 +107,7 @@ public class Downloads extends Activity {
 			}
 		
 		 lv1 = (ExpandableListView)this.findViewById(R.id.listView2);
-		//lv1.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1 , listelements));
-		
-		
+	
 		progress = new Dialog(this);
         progress.setTitle("Lekérés folyamatban...");
 		
@@ -163,25 +155,12 @@ public class Downloads extends Activity {
 	    return true;
 	}
 	
-	/*
-	public void DownThemAll(View view) {
-				 
-			 DownloadThread dt = new DownloadThread(day);
-			 dt.start();
-		}*/
-	
-	
-	
 	public void downThemAll(View v)
 	{
 		Downloader dl = new Downloader(this.getApplicationContext(), day);
 		DownloadThreadQueue.getInstance().execute(dl);
-		
-		Toast.makeText(v.getContext(), day.size() + " elem hozzáadva a letöltési listához.", 50000).show();
-		
+		Toast.makeText(v.getContext(), day.size() + " elem hozzáadva a letöltési listához.", 50000).show();		
 	}
 
 	
 }
-
-

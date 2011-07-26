@@ -183,7 +183,7 @@ public class Main extends Activity {
 		buttons.add(button);
 		
 		SelectorDialog d = new SelectorDialog(v.getContext(),"Minoség",buttons);
-		
+		d.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 		d.show();
 		
 	
@@ -272,7 +272,7 @@ public class Main extends Activity {
 		buttons.add(button);
 		
 		SelectorDialog d = new SelectorDialog(v.getContext(),"Csatornák",buttons);
-		
+		d.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 		d.show();
 		
 		  
