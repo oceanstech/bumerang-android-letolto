@@ -10,11 +10,11 @@ android:shape="rectangle">
                 
                
             
-      <!--       <corners
+             <corners
 
 android:bottomRightRadius="5dp"
 android:topLeftRadius="5dp"
 
-/>-->
+/>
               
 </shape>
