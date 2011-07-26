@@ -12,6 +12,7 @@ import org.apache.http.client.ClientProtocolException;
 import com.bumerang.model.Day;
 import com.bumerang.model.Downloader;
 import com.bumerang.model.Musor;
+import com.bumerang.util.DownloadThreadQueue;
 import com.bumerang.util.ExpandableMusorListaAdapter;
 
 import android.app.Activity;
@@ -40,7 +41,8 @@ public class Downloads extends Activity {
 	static final String REGEXP = "<p align=\"justify\">(.+?)</p>";
 	static final String REGEXP_MP3 = "http://s.bumerang.hu(.+?).mp3";
 	static final String REGEXP_IMAGE = "<img src=\"hirkep/kicsi/(.+?)\" width=\"102\" height=\"252\" align=\"left\" />";
-	Locale Magyar = new Locale("hu","HU");
+	private Locale Magyar = new Locale("hu","HU");
+	
 	
 	String[] listelements;
 	
@@ -173,7 +175,10 @@ public class Downloads extends Activity {
 	public void downThemAll(View v)
 	{
 		Downloader dl = new Downloader(this.getApplicationContext(), day);
-		 dl.start();
+		DownloadThreadQueue.getInstance().execute(dl);
+		
+		Toast.makeText(v.getContext(), day.size() + " elem hozzáadva a letöltési listához.", 50000).show();
+		
 	}
 
 	

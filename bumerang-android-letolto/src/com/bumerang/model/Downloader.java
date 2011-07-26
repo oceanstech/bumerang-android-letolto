@@ -28,6 +28,8 @@ import org.jaudiotagger.tag.datatype.Artwork;
 import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
 
 import com.bumerang.R;
+import com.bumerang.util.DownloadThreadQueue;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -173,18 +175,21 @@ public class Downloader extends Thread {
 			 }
 		   };
 	
+	
 	public Downloader(Context c,Day day)
 	{
 		this.day = day;
 		this.context = c;
 		mManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		
 	}
 	
-	public Downloader(Context c, Musor musor)
+	public Downloader(Context c, Musor m)
 	{
-		this.musor = musor;
+		this.musor = m;
 		this.context = c;
 		mManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		
 	}
 	
 	

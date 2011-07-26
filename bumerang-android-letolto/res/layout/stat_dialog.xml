@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+          <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"    android:layout_height="wrap_content" android:orientation="vertical" android:id="@+id/linearLayout1" android:layout_width="fill_parent">
+            
+            <LinearLayout android:orientation="vertical" android:id="@+id/linearLayout4" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/data_stat_bg">
+                <LinearLayout android:orientation="horizontal" android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="fill_parent">
+                    <ImageView android:id="@+id/imageView2" android:layout_height="wrap_content" android:src="@drawable/chart" android:layout_width="wrap_content"></ImageView>
+                    <LinearLayout android:id="@+id/linearLayout3" android:paddingBottom="10dip" android:layout_height="fill_parent" android:layout_width="fill_parent" android:paddingTop="10dip">
+                        <ImageView android:layout_height="fill_parent" android:layout_weight="1" android:src="@drawable/bumerang_status_part" android:id="@+id/bumerang_bar" android:layout_width="0px"></ImageView>
+                        <ImageView android:layout_height="fill_parent" android:layout_weight="1" android:src="@drawable/other_status_part" android:id="@+id/other_bar" android:layout_width="0px"></ImageView>
+                        <ImageView android:layout_height="fill_parent" android:layout_weight="1" android:src="@drawable/free_status_part" android:id="@+id/free_bar" android:layout_width="0px"></ImageView>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:id="@+id/linearLayout5" android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center_horizontal">
+                    <TextView android:shadowDx="2" android:layout_height="wrap_content" android:gravity="center_horizontal" android:shadowColor="#000000" android:shadowDy="2" android:fadingEdge="horizontal" android:shadowRadius="2" android:layout_width="wrap_content" android:textColor="#ef4444" android:id="@+id/bumerang_space" android:textSize="12dip" android:text="Letöltött/" android:paddingRight="1dip"></TextView>
+                    <TextView android:shadowDx="2" android:layout_height="wrap_content" android:gravity="center_horizontal" android:shadowColor="#000000" android:shadowDy="2" android:fadingEdge="horizontal" android:shadowRadius="2" android:layout_width="wrap_content" android:textColor="#141414" android:id="@+id/other_space" android:textSize="12dip" android:text="Egyéb/" android:paddingRight="1dip"></TextView>
+                    <TextView android:shadowDx="2" android:layout_height="wrap_content" android:gravity="center_horizontal" android:shadowColor="#000000" android:shadowDy="2" android:fadingEdge="horizontal" android:shadowRadius="2" android:layout_width="wrap_content" android:textColor="#53933f" android:id="@+id/free_space" android:textSize="12dip" android:text="Szabad:"></TextView>
+                </LinearLayout>
+            </LinearLayout>
+       
+          
+        </LinearLayout>
+

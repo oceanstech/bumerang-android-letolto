@@ -7,11 +7,11 @@ android:shape="rectangle">
                 android:angle="270" />
                 
                 
-             <corners
+     <!--          <corners
 
 android:bottomLeftRadius="5dp"
 android:topRightRadius="5dp"
 
-/> 
+/> -->
               
 </shape>
