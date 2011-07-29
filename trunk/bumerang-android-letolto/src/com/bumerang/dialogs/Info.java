@@ -41,6 +41,20 @@ public class Info extends Dialog {
 		
 
 		private Button button;
+		
+		View.OnClickListener logout_listener = new View.OnClickListener(){
+
+			public void onClick(View v) {
+				Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+			      
+				  Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
+			        intent.setData(u);
+			        				        
+			       v.getContext().startActivity(intent);
+				
+			}
+
+		};
 
 		public void handleMessage(Message msg) {
 			 if(msg.what==4)
@@ -149,42 +163,11 @@ public class Info extends Dialog {
 				 TextView tw = new TextView(context);
 					tw.setText("Verzió:"+this_version);
 					l.addView(tw);
-				  Button button = (Button) infalInflater.inflate(R.layout.selector_button, null);
-					
-					
-					button.setText("Logout információs oldal");
-					button.setOnClickListener(new View.OnClickListener(){
-
-						public void onClick(View v) {
-							Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-						      
-							  Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
-						        intent.setData(u);
-						        				        
-						       v.getContext().startActivity(intent);
-							
-						}
-
-						
-						
-					});
+				  
+					createButton("Logout információs oldal",logout_listener);
 				 
-					  l.addView(button);
-					  
-					  
-					  button = (Button) infalInflater.inflate(R.layout.selector_button, null);
-						
-						
-						button.setText("Kapcsolódási hiba...");
-						
-						
-						  l.addView(button);
-				
-				
-				 
+					createButton("Kapcsolódási hiba...",null);
 					 
-					 
-			 
 				}
 	}
 
@@ -196,23 +179,9 @@ public class Info extends Dialog {
 				tw.setText("Verzió:"+this_version);
 				l.addView(tw);
 			
-				View.OnClickListener listener = new View.OnClickListener(){
-
-					public void onClick(View v) {
-						Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-					      
-						  Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
-					        intent.setData(u);
-					        				        
-					       v.getContext().startActivity(intent);
-						
-					}
-
-				};
+				
 					
-				
-				
-			 createButton("Logout információs oldal",listener);
+			 createButton("Logout információs oldal",logout_listener);
 			 
 			 createButton("Lekérdezés folyamatban...",null);
 				  		

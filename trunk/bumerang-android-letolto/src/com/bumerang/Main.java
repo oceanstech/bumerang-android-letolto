@@ -14,6 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.bumerang.dialogs.Info;
 import com.bumerang.dialogs.SelectorDialog;
+import com.bumerang.model.FileManager;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -93,6 +94,7 @@ public class Main extends Activity {
 		 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
 		this.setContentView(R.layout.main);
 		
+//	FileManager.getInstance().getFileStructure();		
 		PackageInfo packageInfo;
 		try {
 			packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
@@ -121,6 +123,7 @@ public class Main extends Activity {
 	    {	
 	    	
 	    Info idi = new Info(this);
+	    idi.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 	    idi.show();
 			
 	    	return true;

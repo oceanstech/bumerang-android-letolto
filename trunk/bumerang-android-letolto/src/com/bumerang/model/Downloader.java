@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import org.jaudiotagger.audio.AudioFile;
@@ -28,11 +29,13 @@ import org.jaudiotagger.tag.datatype.Artwork;
 import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
 
 import com.bumerang.R;
+import com.bumerang.util.DOWNLOADSContentProvider;
 import com.bumerang.util.DownloadThreadQueue;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -56,7 +59,7 @@ public class Downloader extends Thread {
 	private RemoteViews contentView;
 	private NotificationManager mManager;
 	private long length;
-	Locale Magyar = new Locale("hu","HU");
+	private Locale Magyar = new Locale("hu","HU");
 	private static final int FINISHED_SUCCESFULLY = 1;
 	private static final int JAUDIOTAGGER_PROBLEM = 2;
 	private static final int FILE_OR_CONNECTION_PROBLEM = 3;
@@ -300,8 +303,6 @@ public class Downloader extends Thread {
 			     }
 			   
 }
-		
-	    
 			f.close();
 		
 	   			
@@ -340,12 +341,12 @@ public class Downloader extends Thread {
 	    
 	    
 	    TagOptionSingleton.getInstance().setAndroid(true);
-	    
+	    Date album_date = new SimpleDateFormat("yyyyMMdd",Magyar).parse(m.getDate());
 			tag.setField(FieldKey.ARTIST,"Bumeráng");
 		
 	    tag.setField(FieldKey.TITLE, m.getTime()+" "+m.getTitle());
 	    tag.setField(FieldKey.URL_OFFICIAL_ARTIST_SITE, "http://www.bumerang.hu");
-	    tag.setField(FieldKey.ALBUM,new SimpleDateFormat("yyyyMMdd",Magyar).parse(m.getDate()).toLocaleString().substring(0,11));
+	    tag.setField(FieldKey.ALBUM,album_date.toLocaleString().substring(0,11));
 	    tag.setField(FieldKey.GENRE, "57");
 	    tag.setField(FieldKey.YEAR, m.getDate().substring(0, 4));
 	    tag.setField(FieldKey.TRACK, String.valueOf(m.getId()));
@@ -353,6 +354,14 @@ public class Downloader extends Thread {
 	    				   
 	    af.commit();
 	    
+	    ContentValues initialValues = new ContentValues();
+        initialValues.put(DOWNLOADSContentProvider.TITLE,m.getTime()+" "+ m.getTitle());
+        initialValues.put(DOWNLOADSContentProvider.DATE, album_date.getTime());
+        initialValues.put(DOWNLOADSContentProvider.POSITION, m.getId());
+        initialValues.put(DOWNLOADSContentProvider.SIZE, length);
+        initialValues.put(DOWNLOADSContentProvider.FILENAME, m.getDirectory()+"/"+m.getDate()+"_"+(m.getId())+".mp3");
+        initialValues.put(DOWNLOADSContentProvider.DL_ID, Integer.valueOf(m.getDate().concat(String.valueOf(m.getId()))));
+        context.getContentResolver().insert(Uri.parse("content://com.bumerang.util.downloadscontentprovider/downloads"), initialValues);
 	   
 	    } catch (KeyNotFoundException e) {
 			delete(m);
