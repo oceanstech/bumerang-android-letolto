@@ -69,14 +69,11 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 	 if (convertView == null) {
          LayoutInflater infalInflater = (LayoutInflater) context
                  .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-         convertView = infalInflater.inflate(R.layout.musor_elem_closed, null);
+         convertView = infalInflater.inflate(R.layout.files_elem_child, null);
      }
-	 
-	 LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.linearLayout2);
-	 ll.removeAllViews();
 	
-	 TextView title = (TextView) convertView.findViewById(R.id.title_text);
-		TextView title2 = (TextView) convertView.findViewById(R.id.time_text);
+	 TextView title = (TextView) convertView.findViewById(R.id.musor_cime);
+		//TextView title2 = (TextView) convertView.findViewById(R.id.size_text);
 		title.setText(files.get(groupPosition).get(childPosition)[0]);
 		//title2.setText(String.valueOf(Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))+" MB");
 	 
@@ -98,14 +95,11 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 		if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.musor_elem_closed, null);
+            convertView = infalInflater.inflate(R.layout.files_elem_closed, null);
         }
 		
-		LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.linearLayout2);
-		ll.removeAllViews();
-		
 		TextView title = (TextView) convertView.findViewById(R.id.title_text);
-		TextView title2 = (TextView) convertView.findViewById(R.id.time_text);
+		TextView title2 = (TextView) convertView.findViewById(R.id.size_text);
 		title.setText(albumok.get(groupPosition)[0]);
 		title2.setText(String.valueOf(Math.round((Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))*100)/100)+" MB");
                 
@@ -131,7 +125,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		
-		return files.get(groupPosition).get(childPosition);
+		return (String[]) files.get(groupPosition).get(childPosition);
 	}
 
 

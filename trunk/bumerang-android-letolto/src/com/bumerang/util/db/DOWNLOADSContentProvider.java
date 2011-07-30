@@ -10,7 +10,7 @@
  * in your installation folder.                                               *
  ******************************************************************************
  */
-package com.bumerang.util;
+package com.bumerang.util.db;
 
 import java.util.*;
 

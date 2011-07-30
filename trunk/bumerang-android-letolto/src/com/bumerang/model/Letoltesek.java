@@ -11,7 +11,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.bumerang.util.DOWNLOADSContentProvider;
+import com.bumerang.util.db.DOWNLOADSContentProvider;
 
 public class Letoltesek {
 	
@@ -63,7 +63,7 @@ public class Letoltesek {
 	private ArrayList<ArrayList<String[]>> albumFilesQuery(ArrayList<String[]> albumok2)
 	{
 		ArrayList<ArrayList<String[]>> Files = new ArrayList<ArrayList<String[]>>();
-		String[] projection = {"TITLE","SIZE"};
+		String[] projection = {"TITLE","FILENAME","SIZE"};
 		
 		Uri allTitles = Uri.parse("content://com.bumerang.util.downloadscontentprovider/downloads");
 		Date album_date;
@@ -78,10 +78,10 @@ public class Letoltesek {
 			
 			if (c.moveToFirst()) {
 		         do{
-		        	 String[] album_fields = new String[1];
+		        	 String[] album_fields = new String[2];
 		        	 album_fields[0]=(c.getString(c.getColumnIndex(
 					               DOWNLOADSContentProvider.TITLE)));
-		        	// album_fields[1]=(c.getString(c.getColumnIndex(DOWNLOADSContentProvider.SUM_SIZE)));
+		        	 album_fields[1]=(c.getString(c.getColumnIndex(DOWNLOADSContentProvider.FILENAME)));
 		        	 album_files.add(album_fields);
 
 		         } while (c.moveToNext());
