@@ -4,7 +4,7 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical">
     <FrameLayout android:id="@+id/frameLayout1" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_gravity="top">
-        <LinearLayout android:layout_height="wrap_content" android:orientation="vertical" android:id="@+id/linearLayout1" android:layout_width="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent">
             <TextView android:shadowColor="#000000" android:gravity="center_horizontal" android:shadowDx="2" android:shadowDy="2" android:layout_width="fill_parent" android:padding="3dp" android:layout_height="wrap_content" android:textSize="25dp" android:fadingEdge="horizontal" android:shadowRadius="2" android:textColor="#FFFFFFFF" android:background="@drawable/header_bg" android:id="@+id/Files_header" android:text="Letöltések"></TextView>
                   
           <ExpandableListView android:layout_width="fill_parent" android:layout_height="fill_parent" android:id="@+id/fileslist"></ExpandableListView>

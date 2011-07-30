@@ -3,8 +3,8 @@ package com.bumerang;
 
 import com.bumerang.dialogs.StatDialog;
 import com.bumerang.model.FileManager;
-import com.bumerang.util.DOWNLOADSContentProvider;
 import com.bumerang.util.ExpandableDownloadsListaAdapter;
+import com.bumerang.util.db.DOWNLOADSContentProvider;
 
 import android.app.Activity;
 import android.graphics.PixelFormat;
