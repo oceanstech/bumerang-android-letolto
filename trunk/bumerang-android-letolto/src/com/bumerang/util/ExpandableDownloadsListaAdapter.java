@@ -65,24 +65,29 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 
 	public View getChildView(final int groupPosition,  int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-				
+		  ViewHolderChildren holder = null;
 	 if (convertView == null) {
+		 
          LayoutInflater infalInflater = (LayoutInflater) context
                  .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
          convertView = infalInflater.inflate(R.layout.files_elem_child, null);
+         holder = new ViewHolderChildren();
+         holder.title= (TextView) convertView.findViewById(R.id.musor_cime);
+        // holder.title2 = (TextView) convertView.findViewById(R.id.size_text);
+         convertView.setTag(holder);
      }
 	
-	 TextView title = (TextView) convertView.findViewById(R.id.musor_cime);
-		//TextView title2 = (TextView) convertView.findViewById(R.id.size_text);
-		title.setText(files.get(groupPosition).get(childPosition)[0]);
-		//title2.setText(String.valueOf(Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))+" MB");
+	 else
+	 {
+		 holder = (ViewHolderChildren) convertView.getTag();
+	 }
+		
+		holder.title.setText(files.get(groupPosition).get(childPosition)[0]);
+		//holder.title2.setText(String.valueOf(Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))+" MB");
 	 
 	 return convertView;
 	}
 
-	
-	
-	
 	public long getGroupId(int groupPosition) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -91,19 +96,23 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
 		
-		
+		ViewHolderParent holder = null;
 		if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.files_elem_closed, null);
+            holder = new ViewHolderParent();
+            holder.title = (TextView) convertView.findViewById(R.id.title_text);
+            holder.title2 = (TextView) convertView.findViewById(R.id.size_text);
+            convertView.setTag(holder);
         }
-		
-		TextView title = (TextView) convertView.findViewById(R.id.title_text);
-		TextView title2 = (TextView) convertView.findViewById(R.id.size_text);
-		title.setText(albumok.get(groupPosition)[0]);
-		title2.setText(String.valueOf(Math.round((Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))*100)/100)+" MB");
-                
-        
+		else
+		{
+			holder = (ViewHolderParent) convertView.getTag();
+		}
+				
+		holder.title.setText(albumok.get(groupPosition)[0]);
+		holder.title2.setText(String.valueOf(Math.round((Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))*100)/100)+" MB");
         return convertView;
 	}
 
@@ -117,21 +126,11 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 		return false;
 	}
 
-
-
-
-
-
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		
 		return (String[]) files.get(groupPosition).get(childPosition);
 	}
-
-
-
-
-
 
 	@Override
 	public int getChildrenCount(int groupPosition) {
@@ -152,7 +151,20 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 	}
 
 	 
-	
+	static class ViewHolderChildren {
+
+		public TextView title2;
+		public TextView title;
+        
+    }
+	 
+	 static class ViewHolderParent {
+
+		public TextView title2;
+		public TextView title;
+
+        
+    }
 	
 	 
 }

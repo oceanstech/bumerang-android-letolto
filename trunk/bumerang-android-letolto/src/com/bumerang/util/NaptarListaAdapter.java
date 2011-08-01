@@ -64,23 +64,34 @@ public class NaptarListaAdapter extends BaseAdapter{
 
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		
-		
+		ViewHolder holder = null;
 		if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.calendar_elem, null);
+            holder = new ViewHolder();
+            holder.day_of_month = (TextView)convertView.findViewById(R.id.nap);
+            holder.day_of_week = (TextView)convertView.findViewById(R.id.hetnapja);
+            convertView.setTag(holder);
         }
+		else
+		{
+			holder = (ViewHolder) convertView.getTag();
+		}
 		
-		TextView day_of_month = (TextView)convertView.findViewById(R.id.nap);
-		TextView day_of_week = (TextView)convertView.findViewById(R.id.hetnapja);
-		
-		day_of_month.setText(month_day_format.format(calendar.get(position).getTime()));
-		day_of_week.setText(weekday.format(calendar.get(position).getTime()));
+		holder.day_of_month.setText(month_day_format.format(calendar.get(position).getTime()));
+		holder.day_of_week.setText(weekday.format(calendar.get(position).getTime()));
 		
 		return convertView;
 	}
 
-	 
+	 static class ViewHolder
+	 {
+
+		public TextView day_of_week;
+		public TextView day_of_month;
+		 
+	 }
 	
 	
 	 

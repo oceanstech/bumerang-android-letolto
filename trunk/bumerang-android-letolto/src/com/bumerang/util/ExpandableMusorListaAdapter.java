@@ -71,39 +71,48 @@ public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		 final Musor data = (Musor)this.getChild(groupPosition, childPosition);
 	
-		
+		ViewHolderChildren holder = null;
 		
 	 if (convertView == null) {
          LayoutInflater infalInflater = (LayoutInflater) context
                  .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
          convertView = infalInflater.inflate(R.layout.musor_elem_opened, null);
+         
+         holder = new ViewHolderChildren();
+         holder.ll =  (LinearLayout)convertView.findViewById(R.id.linearLayout3);
+         holder.download= (Button) infalInflater.inflate(R.layout.download_button, null);
+         holder.play = (Button) infalInflater.inflate(R.layout.play_button, null);
+         holder.show = (Button) infalInflater.inflate(R.layout.video_button, null);
+         holder.image = (ImageView) convertView.findViewById(R.id.musor_image);
+    	 holder.tv = (TextView) convertView.findViewById(R.id.description_text);
+         convertView.setTag(holder);
      }
-	 
-	 LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.linearLayout3);
-	 ll.removeAllViews();
+	 else
+	 {
+		 holder = (ViewHolderChildren)convertView.getTag();
+	 }
 	
-	 LayoutInflater infalInflater = (LayoutInflater) context
-     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	 
+	 holder.ll.removeAllViews();
+	 holder.image.setImageBitmap(data.getImage());
+	 holder.tv.setText(data.getTartalom());
 	 final Uri u;
 		
 	 String url = filemanager.isExisting(data.getDate(), groupPosition);
 	 
 	 
-	 
 	if(url == null && data.getMP3()!=null)	    
 	{
 		u = Uri.parse(data.getMP3());
-		Button download= (Button) infalInflater.inflate(R.layout.download_button, null);
 		
-		download.setOnClickListener(new View.OnClickListener(){
+		
+		holder.download.setOnClickListener(new View.OnClickListener(){
 
 			public void onClick(View v) {
 			Downloader dt = new Downloader(context,data);
 			DownloadThreadQueue.getInstance().execute(dt);
 			Toast.makeText(v.getContext(), "Egy elem hozzáadva a letöltési listához.", 50000).show();
 		}});
-	    ll.addView(download);
+	    holder.ll.addView(holder.download);
 	}
 	   	
 	    else
@@ -114,11 +123,9 @@ public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 	if(data.getMP3()!=null)	    
 	{
 	
-	Button play = (Button) infalInflater.inflate(R.layout.play_button, null);
-	
-	play.setOnClickListener(new View.OnClickListener() {
+	holder.play.setOnClickListener(new View.OnClickListener() {
 		   
-		   public void onClick(View v) {
+		public void onClick(View v) {
   
 			   
 		        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
@@ -133,18 +140,11 @@ public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 		   }
 		  });
 	
-	ll.addView(play);
+	holder.ll.addView(holder.play);
 	}
 	 if(data.hasVideos())
      {
-		 
-		  infalInflater = (LayoutInflater) context
-         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		Button show = (Button) infalInflater.inflate(R.layout.video_button, null);
-		
-		
-
-		 show.setOnClickListener(new View.OnClickListener() {
+		 holder.show.setOnClickListener(new View.OnClickListener() {
 			   
 			   public void onClick(View v) {
 			    VideoGalleryDialog customizeDialog = new VideoGalleryDialog(context,data);
@@ -155,80 +155,73 @@ public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 		 
 		 
 
-		 ll.addView(show);
-		 
-    
-     }
+		 holder.ll.addView(holder.show);
+	}
 	 
-	 ImageView image = (ImageView) convertView.findViewById(R.id.musor_image);
-	 image.setImageBitmap(data.getImage());
-	 
-	 TextView tv = (TextView) convertView.findViewById(R.id.description_text);
-     tv.setText(data.getTartalom());
-    
-
-    
      return convertView;
 	}
 
 	public int getChildrenCount(int groupPosition) {
-		// TODO Auto-generated method stub
+		
 		return 1;
 	}
 
 	public Object getGroup(int groupPosition) {
-		// TODO Auto-generated method stub
-		
-		
 		
 		return musorok.get(groupPosition);
 	}
 
 	public int getGroupCount() {
-		// TODO Auto-generated method stub
+		
 		return musorok.size();
 	}
 
 	public long getGroupId(int groupPosition) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
-		
+		ViewHolderParent holder=null;
 		Musor data = (Musor) this.getGroup(groupPosition);
 		if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.musor_elem_closed, null);
+            holder=new ViewHolderParent();
+            
+            holder.ll =  (LinearLayout) convertView.findViewById(R.id.linearLayout2);
+            holder.tv  = (TextView) convertView.findViewById(R.id.title_text);
+            holder.tv2 = (TextView) convertView.findViewById(R.id.time_text);
+            holder.iw = new ImageView(context);
+            holder.iw.setImageResource(R.drawable.video);
+            holder.saved = new ImageView(context);
+            holder.saved.setImageResource(R.drawable.saved);
+            convertView.setTag(holder);
         }
+		else
+		{
+			holder = (ViewHolderParent)convertView.getTag();
+		}
 		
-		LinearLayout ll = (LinearLayout) convertView.findViewById(R.id.linearLayout2);
-		ll.removeAllViews();
-        TextView tv = (TextView) convertView.findViewById(R.id.title_text);
-        tv.setText(data.getTitle());
-        TextView tv2 = (TextView) convertView.findViewById(R.id.time_text);
-        tv2.setText(data.getTime());
+		
+		holder.ll.removeAllViews();
+        
+		holder.tv.setText(data.getTitle());
+        
+		holder.tv2.setText(data.getTime());
         
         if(data.hasVideos())
         {
-        	 
-        	 ImageView iw = new ImageView(context);
-        	 iw.setImageResource(R.drawable.video);
-        	 ll.addView(iw);
+        	 holder.ll.addView(holder.iw);
         }
        
         if(filemanager.isExisting(data.getDate(), groupPosition)!=null)
-        {
-        	
-       	 ImageView iw = new ImageView(context);
-       	 iw.setImageResource(R.drawable.saved);
-       	 ll.addView(iw);
-       	
+        { 	       	 
+       	 holder.ll.addView(holder.saved);
         }
-        
-        
+                
         return convertView;
 	}
 
@@ -243,7 +236,25 @@ public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 	}
 
 	 
-	
+	 static class ViewHolderParent {
+         public ImageView saved;
+         public ImageView iw;
+         public TextView tv2;
+         public TextView tv;
+         LinearLayout ll;
+         ImageView icon;
+     }
+	 
+	 static class ViewHolderChildren {
+
+		public TextView tv;
+		public ImageView image;
+		public Button show;
+		public Button play;
+		public Button download;
+		public LinearLayout ll;
+         
+     }
 	
 	 
 }
