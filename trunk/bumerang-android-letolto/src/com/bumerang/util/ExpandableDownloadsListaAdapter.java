@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.TreeMap;
 import java.util.SortedMap;
@@ -30,6 +32,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +48,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
     private ArrayList<String[]> albumok;
     private ArrayList<ArrayList<String[]>> files;
     private Letoltesek data;
+    private HashMap<Integer,Boolean> selected;
     
 
 	private FileManager filemanager;
@@ -54,6 +60,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
         filemanager = FileManager.getInstance();   
         albumok = data.getAlbums();
         files = data.getFiles(albumok);
+        selected = new HashMap<Integer,Boolean>();
        
      
     }
@@ -73,6 +80,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
          convertView = infalInflater.inflate(R.layout.files_elem_child, null);
          holder = new ViewHolderChildren();
          holder.title= (TextView) convertView.findViewById(R.id.musor_cime);
+         holder.checkdel= (CheckBox) convertView.findViewById(R.id.checkBox1);
         // holder.title2 = (TextView) convertView.findViewById(R.id.size_text);
          convertView.setTag(holder);
      }
@@ -81,7 +89,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 	 {
 		 holder = (ViewHolderChildren) convertView.getTag();
 	 }
-		
+	 if(selected.get(groupPosition)!=null && selected.get(groupPosition)) holder.checkdel.setChecked(true);
 		holder.title.setText(files.get(groupPosition).get(childPosition)[0]);
 		//holder.title2.setText(String.valueOf(Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))+" MB");
 	 
@@ -93,7 +101,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 		return 0;
 	}
 
-	public View getGroupView(int groupPosition, boolean isExpanded,
+	public View getGroupView(final int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
 		
 		ViewHolderParent holder = null;
@@ -104,6 +112,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
             holder = new ViewHolderParent();
             holder.title = (TextView) convertView.findViewById(R.id.title_text);
             holder.title2 = (TextView) convertView.findViewById(R.id.size_text);
+            holder.checkdel = (CheckBox)convertView.findViewById(R.id.checkBox1);
             convertView.setTag(holder);
         }
 		else
@@ -112,7 +121,18 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 		}
 				
 		holder.title.setText(albumok.get(groupPosition)[0]);
+		if(selected.get(groupPosition)!=null && selected.get(groupPosition)) holder.checkdel.setChecked(true);
 		holder.title2.setText(String.valueOf(Math.round((Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))*100)/100)+" MB");
+		holder.checkdel.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				data.deletable(groupPosition);
+				selected.put(groupPosition, true);
+			
+				
+			}});
         return convertView;
 	}
 
@@ -153,6 +173,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 	 
 	static class ViewHolderChildren {
 
+		public CheckBox checkdel;
 		public TextView title2;
 		public TextView title;
         
@@ -160,6 +181,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 	 
 	 static class ViewHolderParent {
 
+		public CheckBox checkdel;
 		public TextView title2;
 		public TextView title;
 
