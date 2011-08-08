@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import android.content.Context;
@@ -18,6 +19,7 @@ public class Letoltesek {
 	private ArrayList<String[]> albumok;
 	private ArrayList<ArrayList<String[]>> musorok = new ArrayList<ArrayList<String[]>>();
 	private Context context;
+	private ArrayList<String> deletable = new ArrayList<String>();
 	private Locale Magyar = new Locale("hu","HU");
 	
 	public Letoltesek(Context c)
@@ -30,6 +32,8 @@ public class Letoltesek {
 		albumok = albumsQuery();
 		return albumok;
 	}
+	
+	
 	
 	public ArrayList<ArrayList<String[]>> getFiles(ArrayList<String[]> albumok2)
 	{
@@ -52,6 +56,7 @@ public class Letoltesek {
 				               DOWNLOADSContentProvider.DATE))))));
 	        	 album_fields[1]=(c.getString(c.getColumnIndex(
 			               DOWNLOADSContentProvider.SUM_SIZE)));
+	        	 
 	        	 albumok.add(album_fields);
 
 	         } while (c.moveToNext());
@@ -62,7 +67,7 @@ public class Letoltesek {
 	
 	private ArrayList<ArrayList<String[]>> albumFilesQuery(ArrayList<String[]> albumok2)
 	{
-		ArrayList<ArrayList<String[]>> Files = new ArrayList<ArrayList<String[]>>();
+		
 		String[] projection = {"TITLE","FILENAME","SIZE"};
 		
 		Uri allTitles = Uri.parse("content://com.bumerang.util.downloadscontentprovider/downloads");
@@ -90,9 +95,17 @@ public class Letoltesek {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Files.add(album_files);
+		musorok.add(album_files);
 		}
-		return Files;
+		return musorok;
+		
+	}
+
+	public void deletable(int groupPosition) {
+		for(String[] filename: musorok.get(groupPosition))
+		{
+			deletable.add(filename[1]);
+		}
 		
 	}
 }

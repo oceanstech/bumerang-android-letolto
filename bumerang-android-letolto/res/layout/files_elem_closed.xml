@@ -3,7 +3,9 @@
             <TextView android:paddingBottom="20dp" android:text="TextView" android:scrollHorizontally="true" android:ellipsize="marquee" android:id="@+id/title_text" android:fadingEdge="horizontal" android:singleLine="true" android:textSize="18dp" android:marqueeRepeatLimit="marquee_forever" android:layout_toLeftOf="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:gravity="left|center"></TextView>
             <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_alignParentRight="true" android:gravity="right|center_vertical|center_horizontal">
                 <TextView android:gravity="right" android:layout_height="wrap_content" android:text="TextView" android:layout_width="wrap_content" android:textSize="14dp" android:id="@+id/size_text"></TextView>
-                <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content"></LinearLayout>
+                <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content">
+                    <CheckBox android:id="@+id/checkBox1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:focusable="false" android:button="@drawable/trash_checkbox"></CheckBox>
+                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
 
