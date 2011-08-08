@@ -1,47 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.bumerang"
-      android:versionCode="1" android:versionName="1.02">
-    
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest android:versionCode="1" android:versionName="1.02"
+    package="com.bumerang" xmlns:android="http://schemas.android.com/apk/res/android">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".Main"
-                  android:label="@string/app_name" android:screenOrientation="portrait">
+        <activity android:label="@string/app_name" android:name=".Main" android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-<activity android:name=".BumerangCalendar" android:screenOrientation="portrait"
-                  >
+        <activity android:name=".BumerangCalendar" android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        
-        <activity android:name=".Files" android:screenOrientation="portrait"
-                  >
+        <activity android:name=".Files" android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-
-
- <activity android:name=".Downloads" android:screenOrientation="portrait"
-                  >
+        <activity android:name=".Downloads" android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <provider
-            android:authorities="com.bumerang.musorokcontentprovider" android:name=".util.db.MUSOROKContentProvider"/>
+            android:authorities="com.bumerang.util.downloadscontentprovider" android:name=".util.db.DOWNLOADSContentProvider"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-sdk android:minSdkVersion="7" />
-
-</manifest> 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-sdk android:minSdkVersion="7"/>
+</manifest>
