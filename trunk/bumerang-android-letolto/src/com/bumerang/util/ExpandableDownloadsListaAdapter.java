@@ -1,44 +1,26 @@
 package com.bumerang.util;
 
-import java.io.File;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.TreeMap;
-import java.util.SortedMap;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import com.bumerang.R;
-import com.bumerang.dialogs.VideoGalleryDialog;
-import com.bumerang.model.Downloader;
 import com.bumerang.model.FileManager;
 import com.bumerang.model.Letoltesek;
-import com.bumerang.model.Musor;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 
@@ -48,10 +30,12 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
     private ArrayList<String[]> albumok;
     private ArrayList<ArrayList<String[]>> files;
     private Letoltesek data;
-    private HashMap<Integer,Boolean> selected;
+    
     
 
 	private FileManager filemanager;
+
+	private boolean deletable=false;
 	
     public ExpandableDownloadsListaAdapter(Context context) 
     {
@@ -60,7 +44,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
         filemanager = FileManager.getInstance();   
         albumok = data.getAlbums();
         files = data.getFiles(albumok);
-        selected = new HashMap<Integer,Boolean>();
+       
        
      
     }
@@ -70,7 +54,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 		return 0;
 	}
 
-	public View getChildView(final int groupPosition,  int childPosition,
+	public View getChildView(final int groupPosition,  final int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 		  ViewHolderChildren holder = null;
 	 if (convertView == null) {
@@ -80,17 +64,30 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
          convertView = infalInflater.inflate(R.layout.files_elem_child, null);
          holder = new ViewHolderChildren();
          holder.title= (TextView) convertView.findViewById(R.id.musor_cime);
-         holder.checkdel= (CheckBox) convertView.findViewById(R.id.checkBox1);
+         holder.delbutton= (Button) convertView.findViewById(R.id.child_trash);
+           
         // holder.title2 = (TextView) convertView.findViewById(R.id.size_text);
+         
          convertView.setTag(holder);
      }
 	
 	 else
 	 {
 		 holder = (ViewHolderChildren) convertView.getTag();
+		
 	 }
-	 if(selected.get(groupPosition)!=null && selected.get(groupPosition)) holder.checkdel.setChecked(true);
-		holder.title.setText(files.get(groupPosition).get(childPosition)[0]);
+	 
+	 holder.delbutton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				
+					data.deleteFile(groupPosition, childPosition);
+					NotifyDataChanged();
+				
+			}});
+	
+	 holder.title.setText(files.get(groupPosition).get(childPosition)[0]);
 		//holder.title2.setText(String.valueOf(Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))+" MB");
 	 
 	 return convertView;
@@ -112,27 +109,30 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
             holder = new ViewHolderParent();
             holder.title = (TextView) convertView.findViewById(R.id.title_text);
             holder.title2 = (TextView) convertView.findViewById(R.id.size_text);
-            holder.checkdel = (CheckBox)convertView.findViewById(R.id.checkBox1);
+            holder.delbutton = (Button)convertView.findViewById(R.id.parentbutton);
+           
+          
             convertView.setTag(holder);
         }
 		else
 		{
 			holder = (ViewHolderParent) convertView.getTag();
+			 
 		}
-				
-		holder.title.setText(albumok.get(groupPosition)[0]);
-		if(selected.get(groupPosition)!=null && selected.get(groupPosition)) holder.checkdel.setChecked(true);
-		holder.title2.setText(String.valueOf(Math.round((Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))*100)/100)+" MB");
-		holder.checkdel.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+		holder.delbutton.setOnClickListener(new OnClickListener(){
 
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				data.deletable(groupPosition);
-				selected.put(groupPosition, true);
-			
+			public void onClick(View v) {
+				
+					data.deleteAlbum(groupPosition);
+					NotifyDataChanged();
 				
 			}});
+				
+		holder.title.setText(albumok.get(groupPosition)[0]);
+		
+		holder.title2.setText(String.valueOf(Math.round((Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))*100)/100)+" MB");
+		
         return convertView;
 	}
 
@@ -170,10 +170,14 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 		return albumok.size();
 	}
 
+	private void NotifyDataChanged()
+	{
+		this.notifyDataSetChanged();
+	}
 	 
 	static class ViewHolderChildren {
 
-		public CheckBox checkdel;
+		public Button delbutton;
 		public TextView title2;
 		public TextView title;
         
@@ -181,12 +185,14 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 	 
 	 static class ViewHolderParent {
 
-		public CheckBox checkdel;
+		public Button delbutton;
 		public TextView title2;
 		public TextView title;
 
         
     }
+
+
 	
 	 
 }

@@ -109,6 +109,7 @@ public class DOWNLOADSContentProvider extends ContentProvider {
 			break;
 		case DOWNLOADS_ALBUMS:
 			return mDB.rawQuery("SELECT date,sum(size) as SUM_SIZE  FROM downloads GROUP BY date ORDER BY date ASC", null);
+		
 			
 
 		default:
@@ -232,6 +233,7 @@ public class DOWNLOADSContentProvider extends ContentProvider {
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
+		if(mDB.isOpen())mDB.close();
 		getContext().getContentResolver().notifyChange(url, null);
 		return count;
 	}

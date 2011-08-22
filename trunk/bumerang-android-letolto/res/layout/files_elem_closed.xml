@@ -4,7 +4,7 @@
             <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_alignParentRight="true" android:gravity="right|center_vertical|center_horizontal">
                 <TextView android:gravity="right" android:layout_height="wrap_content" android:text="TextView" android:layout_width="wrap_content" android:textSize="14dp" android:id="@+id/size_text"></TextView>
                 <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content">
-                    <CheckBox android:id="@+id/checkBox1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:focusable="false" android:button="@drawable/trash_checkbox"></CheckBox>
+                    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:focusable="false" android:id="@+id/parentbutton" android:background="@drawable/trash_checkbox"></Button>
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
