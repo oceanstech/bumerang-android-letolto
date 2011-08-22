@@ -2,6 +2,7 @@ package com.bumerang.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
@@ -66,6 +67,32 @@ public class FileManager {
     		return path;
     	 }
 		 return null;
+	}
+	
+	 static public boolean deleteDirectory(File path) {
+		    if( path.exists() ) {
+		      File[] files = path.listFiles();
+		      for(int i=0; i<files.length; i++) {
+		         if(files[i].isDirectory()) {
+		           deleteDirectory(files[i]);
+		         }
+		         else {
+		           files[i].delete();
+		         }
+		      }
+		    }
+		    return( path.delete() );
+		  }
+	
+	public void deleteFolder(Date date)
+	{
+		String path = directory+new SimpleDateFormat("yyyyMMdd").format(date);
+		deleteDirectory(new File(path));
+	}
+	
+	public void deleteFile(String path)
+	{
+		new File(path).delete();
 	}
 	
 	public TreeSet<TreeMap<Integer, File>> getFileStructure()
@@ -159,5 +186,7 @@ class FileComparator implements Comparator<Integer> {
 	
 	
 	}
+
+
 
 }

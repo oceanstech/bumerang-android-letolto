@@ -1,22 +1,27 @@
 package com.bumerang;
 
+import java.util.ArrayList;
 
 import com.bumerang.dialogs.StatDialog;
 import com.bumerang.model.FileManager;
 import com.bumerang.util.ExpandableDownloadsListaAdapter;
-import com.bumerang.util.db.DOWNLOADSContentProvider;
 
 import android.app.Activity;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
 public class Files extends Activity {
+
+	
 
 	private ExpandableDownloadsListaAdapter adapter;
 	private ExpandableListView lv1;
@@ -45,7 +50,6 @@ public class Files extends Activity {
 				d.show();
 				
 			}});
-		
 		
 	}
 	
