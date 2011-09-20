@@ -3,7 +3,7 @@
             
             <LinearLayout android:orientation="vertical" android:id="@+id/linearLayout4" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/data_stat_bg">
                 <LinearLayout android:id="@+id/linearLayout5" android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center_horizontal" android:layout_gravity="center_vertical|center_horizontal">
-                    <TextView android:layout_height="wrap_content" android:gravity="center_horizontal" android:text="Eddigi letöltések feldolgozása: " android:shadowColor="#000000" android:textColor="#FFFFFF" android:shadowDy="2" android:fadingEdge="horizontal" android:shadowDx="2" android:layout_width="wrap_content" android:paddingRight="1dip" android:shadowRadius="1" android:textSize="18dip" android:id="@+id/upd_text"></TextView>
+                    <TextView android:layout_height="wrap_content" android:gravity="center_horizontal" android:shadowColor="#000000" android:textColor="#FFFFFF" android:shadowDy="2" android:fadingEdge="horizontal" android:shadowDx="2" android:layout_width="wrap_content" android:paddingRight="1dip" android:shadowRadius="1" android:textSize="18dip" android:id="@+id/upd_text" android:text="Fájlok feldolgozása: "></TextView>
                     <TextView android:textColor="#ffffff" android:textSize="18dip" android:layout_height="wrap_content" android:id="@+id/upd_stat" android:layout_width="wrap_content"></TextView>
                 </LinearLayout>
             </LinearLayout>
