@@ -233,7 +233,7 @@ public class DOWNLOADSContentProvider extends ContentProvider {
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
-		if(mDB.isOpen())mDB.close();
+		
 		getContext().getContentResolver().notifyChange(url, null);
 		return count;
 	}
