@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -92,7 +93,7 @@ public class Info extends Dialog {
 				 
 					  l.addView(button);
 					  
-					  
+					 final String version = msg.getData().getString("version");
 					  button = (Button) infalInflater.inflate(R.layout.selector_button, null);
 						
 						
@@ -102,7 +103,7 @@ public class Info extends Dialog {
 						public void onClick(View v) {
 							Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
 						      
-							  Uri u = Uri.parse("http://www.4shared.com/file/0Guy4Lwu/Bumerang.html");
+							  Uri u = Uri.parse("http://bumerang-android-letolto.googlecode.com/files/Bumerang-"+version+".apk");
 						        intent.setData(u);
 						        				        
 						       v.getContext().startActivity(intent);
@@ -332,7 +333,14 @@ class CheckUpdate extends Thread {
 							PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
 							if(Double.valueOf(html)>Double.valueOf(packageInfo.versionName))
 							{
-								 handler.sendEmptyMessage(2);
+								Bundle b = new Bundle();
+							    b.putString("version", html);
+							  
+								 Message message = new Message();
+								 message.setData(b);
+								 message.what=2;
+								handler.sendMessage(message);
+								
 							}
 							else 
 							handler.sendEmptyMessage(0);
