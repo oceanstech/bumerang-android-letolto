@@ -3,6 +3,7 @@ package com.bumerang.model;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
@@ -22,7 +23,7 @@ import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.TagException;
 
-import com.bumerang.model.FileManager.FileComparator;
+
 
 import android.os.Environment;
 
@@ -35,8 +36,7 @@ public class FileManager {
 	}
 
 	private static FileManager instance;
-	private static DirComparator dirCompare;
-	private static FileComparator fileCompare;
+	
 	
 	private FileManager()
 	{
@@ -95,96 +95,25 @@ public class FileManager {
 		new File(path).delete();
 	}
 	
-	public TreeSet<TreeMap<Integer, File>> getFileStructure()
-	{	
-		AudioFile af;
-		File dir = new File(getDirectory());
-		
-		File[] directories = dir.listFiles();
-		if(dirCompare==null) dirCompare = new DirComparator();
-		if(fileCompare==null) fileCompare = new FileComparator();
-		
-		TreeSet<TreeMap<Integer, File>> mp3_dir = new TreeSet<TreeMap<Integer,File>>(dirCompare);
-		
-		for(File adir:directories)
+	public static ArrayList<String> getAllFilePath(String parent)
+	{
+		ArrayList<String> file_paths = new ArrayList<String>();
+		if(parent == null) parent = directory;
+		File[] children = new File(parent).listFiles();
+		for(File child : children)
 		{
-			if(adir.getName().length()==8)
-			{
-				TreeMap<Integer, File> mp3s = new TreeMap<Integer,File>(fileCompare); 
-				File[] Files = adir.listFiles();
-				
-				for(File mp3_file:Files)
+			if(child.isDirectory())
 				{
-					String[] a = mp3_file.getName().split("\\.");
-					if(mp3_file.getName().split("\\.")[1].compareTo("mp3")==0)
-					{
-						
-						
-						try {
-							af = AudioFileIO.read(mp3_file);
-							if(af.getTag().hasField(FieldKey.TRACK.toString()))
-							mp3s.put(Integer.valueOf(af.getTag().getFirst(FieldKey.TRACK)),mp3_file);
-						} catch (CannotReadException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (TagException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (ReadOnlyFileException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (InvalidAudioFrameException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-					}
-					
+					file_paths.addAll(getAllFilePath(child.getAbsolutePath()));
 				}
-				mp3_dir.add( mp3s);
-				
-			}
-		
-		}
-				
-		return mp3_dir;
-	}
-	
-	class DirComparator implements Comparator<TreeMap<Integer,File>> {
-
-		@Override
-		public int compare(TreeMap<Integer, File> a,
-				TreeMap<Integer, File> b) {
-			if(a!=null && b!=null)
+			else
 			{
-			if(a.firstKey()<b.firstKey()) return -1;
-			else if(a.firstKey()>b.firstKey()) return 1;
+				if(child.getAbsolutePath().endsWith(".mp3"))
+					file_paths.add(child.getAbsolutePath());
+				
 			}
-			return 0;
 		}
-
-		
-		
-	}
-	
-class FileComparator implements Comparator<Integer> {
-
-	@Override
-	public int compare(Integer a, Integer b) {
-		if(a!=null && b!=null)
-		{
-		if(a.intValue()<b.intValue()) return -1;
-		else if(a.intValue()>b.intValue()) return 1;
-		}
-		
-		return 0;
-	}
-
-	
-	
+		return file_paths;
 	}
 
 

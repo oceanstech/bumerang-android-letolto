@@ -18,7 +18,7 @@ public class Letoltesek {
 
 	private ArrayList<String[]> albumok;
 	private ArrayList<ArrayList<String[]>> musorok = new ArrayList<ArrayList<String[]>>();
-	private Context context;
+	private static Context context;
 	private ArrayList<String> deletable = new ArrayList<String>();
 	private Locale Magyar = new Locale("hu","HU");
 
@@ -60,6 +60,7 @@ public class Letoltesek {
 			} while (c.moveToNext());
 
 		}
+		c.close();
 		return albumok;
 	}
 
@@ -89,14 +90,39 @@ public class Letoltesek {
 
 					} while (c.moveToNext());
 				}
+				c.close();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			musorok.add(album_files);
 		}
+		
 		return musorok;
 
+	}
+	
+	public static ArrayList<String> filesQuery()
+	{
+		String[] projection = {"FILENAME"};
+		Uri allTitles = Uri.parse("content://com.bumerang.util.downloadscontentprovider/downloads");
+		ArrayList<String> filepaths = new ArrayList<String>();
+		Cursor c = context.getContentResolver().query(allTitles, projection, null,null, null);
+		
+		if (c.moveToFirst()) {
+			do{
+				
+				filepaths.add((c.getString(c.getColumnIndex(
+						DOWNLOADSContentProvider.FILENAME))));
+				
+				
+
+			} while (c.moveToNext());
+		}
+		c.close();
+		return filepaths;
+	
+	
 	}
 
 	private void DeleteFolder(Date date)
