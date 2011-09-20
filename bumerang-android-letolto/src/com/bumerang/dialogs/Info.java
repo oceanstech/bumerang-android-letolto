@@ -93,7 +93,7 @@ public class Info extends Dialog {
 				 
 					  l.addView(button);
 					  
-					 final String version = msg.getData().getString("version");
+					 final String version = msg.getData().getString("version"); 
 					  button = (Button) infalInflater.inflate(R.layout.selector_button, null);
 						
 						
