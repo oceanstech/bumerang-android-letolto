@@ -1,23 +1,21 @@
 package com.bumerang.util;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
 import com.bumerang.R;
 import com.bumerang.model.FileManager;
 import com.bumerang.model.Letoltesek;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,7 +33,6 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 
 	private FileManager filemanager;
 
-	private boolean deletable=false;
 	
     public ExpandableDownloadsListaAdapter(Context context) 
     {
@@ -65,6 +62,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
          holder = new ViewHolderChildren();
          holder.title= (TextView) convertView.findViewById(R.id.musor_cime);
          holder.delbutton= (Button) convertView.findViewById(R.id.child_trash);
+         holder.playbutton= (Button) convertView.findViewById(R.id.play_button);
            
         // holder.title2 = (TextView) convertView.findViewById(R.id.size_text);
          
@@ -86,6 +84,24 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 					NotifyDataChanged();
 				
 			}});
+	 holder.playbutton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				
+				Uri u = Uri.parse("file://"+files.get(groupPosition).get(childPosition)[1]);
+		        Intent intent = new Intent(Intent.ACTION_VIEW);
+		       intent.setDataAndType(u,"audio/mp3"); 
+		       
+		       try { 
+	                  v.getContext().startActivity(intent); 
+	           } catch (ActivityNotFoundException e) { 
+	                  e.printStackTrace(); 
+	           } 
+					
+				
+			}});
+	 
 	
 	 holder.title.setText(files.get(groupPosition).get(childPosition)[0]);
 		//holder.title2.setText(String.valueOf(Float.valueOf(albumok.get(groupPosition)[1])/(1024*1024))+" MB");
@@ -177,6 +193,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 	 
 	static class ViewHolderChildren {
 
+		public Button playbutton;
 		public Button delbutton;
 		public TextView title2;
 		public TextView title;

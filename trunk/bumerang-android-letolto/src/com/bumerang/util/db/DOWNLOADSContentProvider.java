@@ -20,8 +20,6 @@ import android.database.sqlite.*;
 import android.net.*;
 import android.text.*;
 
-import com.bumerang.util.*;
-
 public class DOWNLOADSContentProvider extends ContentProvider {
 
 	private FilesOpenHelper dbHelper;

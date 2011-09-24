@@ -50,6 +50,8 @@ public class Info extends Dialog {
 			      
 				  Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
 			        intent.setData(u);
+			        
+			        
 			        				        
 			       v.getContext().startActivity(intent);
 				
