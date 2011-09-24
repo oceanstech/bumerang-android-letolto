@@ -12,7 +12,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,12 +127,12 @@ public class ExpandableMusorListaAdapter extends BaseExpandableListAdapter{
 		   
 		public void onClick(View v) {
   
-			   
-		        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+			
+		        Intent intent = new Intent(Intent.ACTION_VIEW);
 		       intent.setDataAndType(u,"audio/mp3"); 
-		       
 		      
-		        try { 
+		      
+		       try { 
 		                  v.getContext().startActivity(intent); 
 		           } catch (ActivityNotFoundException e) { 
 		                  e.printStackTrace(); 

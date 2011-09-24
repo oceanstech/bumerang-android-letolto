@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/linearLayout1" android:weightSum="0.2" android:layout_weight="0.2" android:background="@drawable/child_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal">
-                    <TextView android:layout_width="fill_parent" android:layout_weight="0.2" android:text="TextView" android:layout_height="wrap_content" android:id="@+id/musor_cime" android:textSize="16dp" android:padding="10dip"></TextView>
-                    <Button android:layout_width="wrap_content" android:layout_weight="0.2" android:layout_height="wrap_content" android:button="@drawable/unselected_trash" android:id="@+id/child_trash" android:background="@drawable/trash_checkbox"></Button>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/linearLayout1" android:background="@drawable/child_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal">
+        <RelativeLayout android:id="@+id/relativeLayout1" android:layout_height="fill_parent" android:layout_width="fill_parent">
+            <TextView android:textSize="16dp" android:padding="10dip" android:id="@+id/musor_cime" android:text="TextView" android:layout_width="fill_parent" android:layout_alignBaseline="@+id/play_button" android:layout_alignBottom="@+id/play_button" android:layout_toLeftOf="@+id/child_trash" android:layout_toRightOf="@+id/play_button" android:layout_height="fill_parent" android:singleLine="true" android:ellipsize="end"></TextView>
+            <Button android:layout_height="wrap_content" android:id="@+id/child_trash" android:background="@drawable/trash_checkbox" android:layout_width="wrap_content" android:layout_alignBaseline="@+id/musor_cime" android:layout_alignBottom="@+id/musor_cime" android:layout_alignParentRight="true"></Button>
+            <Button android:layout_height="wrap_content" android:id="@+id/play_button" android:background="@drawable/play_list" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"></Button>
+        </RelativeLayout>
                 </LinearLayout>
     

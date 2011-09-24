@@ -29,7 +29,6 @@ import org.jaudiotagger.tag.datatype.Artwork;
 import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
 
 import com.bumerang.R;
-import com.bumerang.util.DownloadThreadQueue;
 import com.bumerang.util.db.DOWNLOADSContentProvider;
 
 import android.app.Notification;

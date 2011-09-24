@@ -100,7 +100,7 @@ public class UpdateDBDialog extends Dialog  {
 					File f = new File(filepath);
 					AudioFile af = AudioFileIO.read(f);
 					Tag tag = af.getTag();
-					if(!tag.isEmpty())
+					if(tag!= null && !tag.isEmpty())
 					{
 					
 					ContentValues initialValues = new ContentValues();

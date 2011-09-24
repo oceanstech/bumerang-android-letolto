@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 import android.content.Context;
@@ -19,7 +17,7 @@ public class Letoltesek {
 	private ArrayList<String[]> albumok;
 	private ArrayList<ArrayList<String[]>> musorok = new ArrayList<ArrayList<String[]>>();
 	private static Context context;
-	private ArrayList<String> deletable = new ArrayList<String>();
+	
 	private Locale Magyar = new Locale("hu","HU");
 
 	public Letoltesek(Context c)

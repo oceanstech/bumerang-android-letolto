@@ -14,7 +14,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.bumerang.dialogs.Info;
 import com.bumerang.dialogs.SelectorDialog;
-import com.bumerang.model.FileManager;
 
 import android.app.Activity;
 import android.app.Notification;

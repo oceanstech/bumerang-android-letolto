@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class DownloadThreadQueue
 {
-    private final int nThreads;
+   private final int nThreads;
     private final PoolWorker[] threads;
     private final LinkedList queue;
     private static DownloadThreadQueue instance;
