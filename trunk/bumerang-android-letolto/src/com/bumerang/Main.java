@@ -48,6 +48,19 @@ public class Main extends Activity {
 	
 	
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(mBoundService!=null){
+			if(this.mBoundService.isplaying())
+				((Button)this.findViewById(R.id.StartStop)).setText("Stop");
+				else
+					((Button)this.findViewById(R.id.StartStop)).setText("Play");
+		}
+		
+	}
+
+	@Override
 	protected void onStart() {
 		
 		super.onStart();
@@ -55,13 +68,14 @@ public class Main extends Activity {
 			if(this.mBoundService.isplaying())
 				((Button)this.findViewById(R.id.StartStop)).setText("Stop");
 				else
-					((Button)this.findViewById(R.id.StartStop)).setText("Stop");
+					((Button)this.findViewById(R.id.StartStop)).setText("Play");
 		}
 		
 	}
 
 	@Override
 	protected void onDestroy() {
+		if(this.isFinishing())
 		this.doUnbindService();
 		super.onDestroy();
 		
@@ -116,6 +130,11 @@ private StreamMusicService mBoundService;
 	        // service that we know is running in our own process, we can
 	        // cast its IBinder to a concrete class and directly access it.
 	        mBoundService = ((StreamMusicService.MusicServiceBinder)service).getservice(); 
+	        if(mBoundService!=null){
+				if(mBoundService.isplaying())
+					setbutton("Stop");
+					
+			}
 	    }
 	    
 	    
@@ -141,6 +160,11 @@ private StreamMusicService mBoundService;
 	    mIsBound = true;
 	}
 	
+	protected void setbutton(String string) {
+		((Button)this.findViewById(R.id.StartStop)).setText(string);
+		
+	}
+
 	void doUnbindService() {
 	    if (mIsBound) {
 	        // Detach our existing connection.
@@ -163,7 +187,7 @@ private StreamMusicService mBoundService;
 		Intent intent = new Intent().setClass(this, StreamMusicService.class);
 		this.startService(intent);
 		this.doBindService();
-		
+		((Button)this.findViewById(R.id.StartStop)).setText("Play");
 //	FileManager.getInstance().getFileStructure();		
 		PackageInfo packageInfo;
 		try {
@@ -176,7 +200,8 @@ private StreamMusicService mBoundService;
 		
 		CheckUpdate dt = new CheckUpdate(context);
 		  dt.start();
-		
+		  
+		  	
 	}
 	
 	@Override
@@ -224,6 +249,7 @@ private StreamMusicService mBoundService;
 		else
 		{
 			this.mBoundService.play();
+			
 			((Button)this.findViewById(R.id.StartStop)).setText("Stop");
 		}
 		

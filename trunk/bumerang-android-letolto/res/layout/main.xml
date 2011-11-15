@@ -41,7 +41,7 @@
         android:id="@+id/LinearLayout01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dip"
+        android:layout_margin="5dip"
         android:layout_weight="1"
         android:background="@drawable/main_button_bg"
         android:clickable="true"
@@ -75,27 +75,17 @@
                 android:focusable="false"
                 android:src="@drawable/vertical_main_separator" />
 
-            <Button
-                android:id="@+id/StartStop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:onClick="online"
-                android:text="Button" />
-
             <TextView
                 android:id="@+id/TextView01"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
                 android:layout_margin="2dip"
-                android:layout_toLeftOf="@+id/StartStop"
                 android:layout_toRightOf="@+id/ImageView02"
                 android:clickable="false"
                 android:focusable="false"
                 android:gravity="center_vertical|center_horizontal"
-                android:padding="2dip"
                 android:shadowColor="#000000"
                 android:shadowDx="2"
                 android:shadowDy="2"
@@ -104,14 +94,27 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20dip" />
 
+            <Button
+                android:id="@+id/StartStop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ImageView02"
+                android:layout_alignLeft="@+id/TextView01"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/TextView01"
+                android:background="@drawable/rounded_header_bg"
+                android:onClick="online"
+                android:textColor="#ffffff" />
+
         </RelativeLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dip"
+        android:layout_margin="5dip"
         android:background="@drawable/main_button_bg"
         android:clickable="true"
         android:focusable="true"
@@ -184,7 +187,7 @@
         android:id="@+id/linearLayout4"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dip"
+        android:layout_margin="5dip"
         android:background="@drawable/main_button_bg"
         android:clickable="true"
         android:focusable="true"
@@ -247,7 +250,7 @@
         android:id="@+id/linearLayout5"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dip"
+        android:layout_margin="5dip"
         android:background="@drawable/main_button_bg"
         android:clickable="true"
         android:focusable="true"
