@@ -1,43 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_height="fill_parent" android:layout_width="fill_parent" 
-  android:background="@drawable/main_bg">
-    <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout1" android:layout_height="wrap_content">
-        <TextView android:shadowColor="#000000" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/textView1" android:shadowRadius="3" android:textSize="26dip" android:text="Bumeráng" android:textColor="#FFFFFF" android:shadowDx="2.5" android:layout_alignParentLeft="true" android:shadowDy="2.5" android:gravity="center_vertical|center_horizontal" android:layout_margin="10dip" android:background="@drawable/rounded_header_bg"></TextView>
-        <ImageView android:layout_height="wrap_content" android:id="@+id/imageView1" android:layout_alignParentLeft="true" android:src="@drawable/header" android:layout_width="wrap_content" android:layout_margin="5dip"></ImageView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:layout_weight="0.1">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dip"
+            android:background="@drawable/rounded_header_bg"
+            android:gravity="center_vertical|center_horizontal"
+            android:shadowColor="#000000"
+            android:shadowDx="2.5"
+            android:shadowDy="2.5"
+            android:shadowRadius="3"
+            android:text="Bumeráng"
+            android:textColor="#FFFFFF"
+            android:textSize="26dip" >
+        </TextView>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dip"
+            android:src="@drawable/header" >
+        </ImageView>
     </RelativeLayout>
-    <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_margin="10dip" android:clickable="true" android:focusable="true" android:onClick="ustream" android:background="@drawable/main_button_bg">
-        <RelativeLayout android:layout_width="wrap_content" android:focusable="false" android:clickable="false" android:id="@+id/relativeLayout2" android:layout_height="fill_parent">
-            <ImageView android:layout_height="wrap_content" android:id="@+id/imageView2"  android:clickable="false" android:focusable="false" android:src="@drawable/webcam" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></ImageView>
-            <ImageView android:layout_height="wrap_content" android:id="@+id/imageView3"  android:clickable="false" android:focusable="false" android:src="@drawable/vertical_main_separator" android:layout_width="wrap_content" android:layout_toRightOf="@+id/imageView2" android:layout_alignTop="@+id/imageView2" android:layout_alignBottom="@+id/imageView2"></ImageView>
-            <TextView android:shadowColor="#000000" android:clickable="false" android:focusable="false" android:layout_height="wrap_content" android:onClick="ustream" android:layout_width="fill_parent" android:id="@+id/textView2" android:shadowRadius="2.5" android:textSize="20dip" android:text="Élő webkamera" android:textColor="#FFFFFF" android:shadowDx="2" android:shadowDy="2" android:padding="5dip" android:layout_margin="5dip" android:layout_toRightOf="@+id/imageView2" android:layout_alignTop="@+id/imageView2" android:layout_alignBottom="@+id/imageView2" android:gravity="center_vertical|center_horizontal"></TextView>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:layout_weight="1"
+        android:background="@drawable/main_button_bg"
+        android:clickable="true"
+        android:focusable="true"
+       >
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout01"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:clickable="false"
+            android:focusable="false" >
+
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/headphone" />
+
+            <ImageView
+                android:id="@+id/ImageView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ImageView01"
+                android:layout_alignTop="@+id/ImageView01"
+                android:layout_toRightOf="@+id/ImageView01"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/vertical_main_separator" />
+
+            <Button
+                android:id="@+id/StartStop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:onClick="online"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="2dip"
+                android:layout_toLeftOf="@+id/StartStop"
+                android:layout_toRightOf="@+id/ImageView02"
+                android:clickable="false"
+                android:focusable="false"
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="2dip"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2.5"
+                android:text="Online adás"
+                android:textColor="#FFFFFF"
+                android:textSize="20dip" />
+
         </RelativeLayout>
     </LinearLayout>
-    
-  <!--   <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout3" android:layout_height="wrap_content" android:layout_margin="10dip" android:clickable="true" android:focusable="true" android:onClick="online" android:background="@drawable/main_button_bg">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:background="@drawable/main_button_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="ustream" android:layout_weight="1">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:clickable="false"
+            android:focusable="false" >
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/webcam" >
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView2"
+                android:layout_alignTop="@+id/imageView2"
+                android:layout_toRightOf="@+id/imageView2"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/vertical_main_separator" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView2"
+                android:layout_alignTop="@+id/imageView2"
+                android:layout_margin="5dip"
+                android:layout_toRightOf="@+id/imageView2"
+                android:clickable="false"
+                android:focusable="false"
+                android:gravity="center_vertical|center_horizontal"
+                android:onClick="ustream"
+                android:padding="5dip"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2.5"
+                android:text="Élő webkamera"
+                android:textColor="#FFFFFF"
+                android:textSize="20dip" >
+            </TextView>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!--
+    <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout3" android:layout_height="wrap_content" android:layout_margin="10dip" android:clickable="true" android:focusable="true" android:onClick="online" android:background="@drawable/main_button_bg">
         <RelativeLayout android:layout_width="wrap_content" android:focusable="false" android:clickable="false" android:id="@+id/relativeLayout3" android:layout_height="fill_parent">
             <ImageView android:layout_height="wrap_content" android:id="@+id/imageView4"  android:clickable="false" android:focusable="false" android:src="@drawable/radio" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></ImageView>
             <ImageView android:layout_height="wrap_content" android:id="@+id/imageView5"  android:clickable="false" android:focusable="false" android:src="@drawable/vertical_main_separator" android:layout_width="wrap_content" android:layout_toRightOf="@+id/imageView4" android:layout_alignTop="@+id/imageView4" android:layout_alignBottom="@+id/imageView4"></ImageView>
             <TextView android:shadowColor="#000000" android:clickable="false" android:focusable="false" android:layout_height="wrap_content" android:onClick="ustream" android:layout_width="fill_parent" android:id="@+id/textView3" android:shadowRadius="2.5" android:textSize="20dip" android:text="Hallgasd On-Line" android:textColor="#FFFFFF" android:shadowDx="2" android:shadowDy="2" android:padding="5dip" android:layout_margin="5dip" android:layout_toRightOf="@+id/imageView4" android:layout_alignTop="@+id/imageView4" android:layout_alignBottom="@+id/imageView4" android:gravity="center_vertical|center_horizontal"></TextView>
         </RelativeLayout>
-    </LinearLayout>--> 
-    
-    <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:layout_margin="10dip" android:clickable="true" android:focusable="true" android:onClick="GoToCalendar" android:background="@drawable/main_button_bg">
-        <RelativeLayout android:layout_width="wrap_content" android:focusable="false" android:clickable="false" android:id="@+id/relativeLayout4" android:layout_height="fill_parent">
-            <ImageView android:layout_height="wrap_content" android:id="@+id/imageView6"  android:clickable="false" android:focusable="false" android:src="@drawable/tape" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></ImageView>
-            <ImageView android:layout_height="wrap_content" android:id="@+id/imageView7"  android:clickable="false" android:focusable="false" android:src="@drawable/vertical_main_separator" android:layout_width="wrap_content" android:layout_toRightOf="@+id/imageView6" android:layout_alignTop="@+id/imageView6" android:layout_alignBottom="@+id/imageView6"></ImageView>
-            <TextView android:shadowColor="#000000" android:clickable="false" android:focusable="false" android:layout_height="wrap_content" android:onClick="ustream" android:layout_width="fill_parent" android:id="@+id/textView4" android:shadowRadius="2.5" android:textSize="20dip" android:text="Archívum" android:textColor="#FFFFFF" android:shadowDx="2" android:shadowDy="2" android:padding="5dip" android:layout_margin="5dip" android:layout_toRightOf="@+id/imageView6" android:layout_alignTop="@+id/imageView6" android:layout_alignBottom="@+id/imageView6" android:gravity="center_vertical|center_horizontal"></TextView>
+    </LinearLayout>
+    -->
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:background="@drawable/main_button_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="GoToCalendar" android:layout_weight="1">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:clickable="false"
+            android:focusable="false" >
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/tape" >
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView6"
+                android:layout_alignTop="@+id/imageView6"
+                android:layout_toRightOf="@+id/imageView6"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/vertical_main_separator" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView6"
+                android:layout_alignTop="@+id/imageView6"
+                android:layout_margin="5dip"
+                android:layout_toRightOf="@+id/imageView6"
+                android:clickable="false"
+                android:focusable="false"
+                android:gravity="center_vertical|center_horizontal"
+                android:onClick="ustream"
+                android:padding="5dip"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2.5"
+                android:text="Archívum"
+                android:textColor="#FFFFFF"
+                android:textSize="20dip" >
+            </TextView>
         </RelativeLayout>
     </LinearLayout>
-    
-     <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout5" android:layout_height="wrap_content" android:layout_margin="10dip" android:clickable="true" android:focusable="true" android:onClick="GoToFiles" android:background="@drawable/main_button_bg">
-        <RelativeLayout android:layout_width="wrap_content" android:focusable="false" android:clickable="false" android:id="@+id/relativeLayout5" android:layout_height="fill_parent">
-            <ImageView android:layout_height="wrap_content" android:id="@+id/imageView8"  android:clickable="false" android:focusable="false" android:src="@drawable/files" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></ImageView>
-            <ImageView android:layout_height="wrap_content" android:id="@+id/imageView9"  android:clickable="false" android:focusable="false" android:src="@drawable/vertical_main_separator" android:layout_width="wrap_content" android:layout_toRightOf="@+id/imageView8" android:layout_alignTop="@+id/imageView8" android:layout_alignBottom="@+id/imageView8"></ImageView>
-            <TextView android:shadowColor="#000000" android:clickable="false" android:focusable="false" android:layout_height="wrap_content" android:onClick="ustream" android:layout_width="fill_parent" android:id="@+id/textView5" android:shadowRadius="2.5" android:textSize="20dip" android:text="Letöltések" android:textColor="#FFFFFF" android:shadowDx="2" android:shadowDy="2" android:padding="5dip" android:layout_margin="5dip" android:layout_toRightOf="@+id/imageView8" android:layout_alignTop="@+id/imageView8" android:layout_alignBottom="@+id/imageView8" android:gravity="center_vertical|center_horizontal"></TextView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:background="@drawable/main_button_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="GoToFiles" android:layout_weight="1">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout5"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:clickable="false"
+            android:focusable="false" >
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/files" >
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView8"
+                android:layout_alignTop="@+id/imageView8"
+                android:layout_toRightOf="@+id/imageView8"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/vertical_main_separator" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView8"
+                android:layout_alignTop="@+id/imageView8"
+                android:layout_margin="5dip"
+                android:layout_toRightOf="@+id/imageView8"
+                android:clickable="false"
+                android:focusable="false"
+                android:gravity="center_vertical|center_horizontal"
+                android:onClick="ustream"
+                android:padding="5dip"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2.5"
+                android:text="Letöltések"
+                android:textColor="#FFFFFF"
+                android:textSize="20dip" >
+            </TextView>
         </RelativeLayout>
     </LinearLayout>
-  
+
 </LinearLayout>

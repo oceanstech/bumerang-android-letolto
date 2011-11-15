@@ -15,18 +15,22 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.bumerang.dialogs.Info;
 import com.bumerang.dialogs.SelectorDialog;
 
+
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,6 +47,26 @@ import android.widget.Toast;
 public class Main extends Activity {
 	
 	
+	@Override
+	protected void onStart() {
+		
+		super.onStart();
+		if(mBoundService!=null){
+			if(this.mBoundService.isplaying())
+				((Button)this.findViewById(R.id.StartStop)).setText("Stop");
+				else
+					((Button)this.findViewById(R.id.StartStop)).setText("Stop");
+		}
+		
+	}
+
+	@Override
+	protected void onDestroy() {
+		this.doUnbindService();
+		super.onDestroy();
+		
+	}
+
 	final Handler handler = new Handler() {
 		   private Notification notifyDetails;
 		private RemoteViews contentView;
@@ -53,7 +77,7 @@ public class Main extends Activity {
 				 
 				 Intent notificationIntent = new Intent(android.content.Intent.ACTION_VIEW);
 			      
-				  Uri u = Uri.parse("http://www.4shared.com/file/0Guy4Lwu/Bumerang.html");
+				  Uri u = Uri.parse("http://bumerang-android-letolto.googlecode.com/files/Bumerang-"+html.trim()+".apk");
 				  notificationIntent.setData(u);
 			        				 
 					  PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
@@ -81,6 +105,50 @@ public class Main extends Activity {
 	private NotificationManager mManager;
 	private Toast hiba;
 
+	
+private StreamMusicService mBoundService;
+	
+	private ServiceConnection mConnection = new ServiceConnection() {
+	    public void onServiceConnected(ComponentName className, IBinder service) {
+	        // This is called when the connection with the service has been
+	        // established, giving us the service object we can use to
+	        // interact with the service.  Because we have bound to a explicit
+	        // service that we know is running in our own process, we can
+	        // cast its IBinder to a concrete class and directly access it.
+	        mBoundService = ((StreamMusicService.MusicServiceBinder)service).getservice(); 
+	    }
+	    
+	    
+	    	
+	    
+
+	    public void onServiceDisconnected(ComponentName className) {
+	        // This is called when the connection with the service has been
+	        // unexpectedly disconnected -- that is, its process crashed.
+	        // Because it is running in our same process, we should never
+	        // see this happen.
+	        mBoundService = null;
+	     
+	    }
+	};
+
+	private boolean mIsBound = false;
+
+	
+	void doBindService() {
+	    bindService(new Intent(Main.this, 
+	            StreamMusicService.class), mConnection, Context.BIND_AUTO_CREATE);
+	    mIsBound = true;
+	}
+	
+	void doUnbindService() {
+	    if (mIsBound) {
+	        // Detach our existing connection.
+	        unbindService(mConnection);
+	        mIsBound = false;
+	    }
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -92,6 +160,9 @@ public class Main extends Activity {
 		 getWindow().setFormat(PixelFormat.RGBA_8888);
 		 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
 		this.setContentView(R.layout.main);
+		Intent intent = new Intent().setClass(this, StreamMusicService.class);
+		this.startService(intent);
+		this.doBindService();
 		
 //	FileManager.getInstance().getFileStructure();		
 		PackageInfo packageInfo;
@@ -138,57 +209,24 @@ public class Main extends Activity {
 	
 	public void online(View v)
 	{
-		ArrayList<Button> buttons = new ArrayList<Button>();
-		 LayoutInflater infalInflater = (LayoutInflater) this
-	     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
-		Button button = (Button) infalInflater.inflate(R.layout.selector_button, null);
-		
-				
-		button.setText("96kbps");
-		button.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				 Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-			      
-				  Uri u = Uri.parse("http://neofmstream2.gtk.hu:8080");
-				  intent.setDataAndType(u, "audio/mpeg");
-			        
-			        
-			       v.getContext().startActivity(intent);
-				
-			}
+		if(!this.mIsBound)
+		{
+			this.doBindService();
+		}
+		if(this.mBoundService.isplaying())
+		{
+			this.mBoundService.stop();
+			this.doUnbindService();
 			
-		});
-		
-		buttons.add(button);
-		button = (Button) infalInflater.inflate(R.layout.selector_button, null);
-		button.setText("128kbps");
-
-		
-		
-		button.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				 Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-			      
-				  Uri u = Uri.parse("http://www.xhosting.hu/NeoFM/128_kbs_mp3.m3u");
-			        intent.setData(u);
-			        
-			       v.getContext().startActivity(intent);
-				
-			}
 			
-		});
+			((Button)this.findViewById(R.id.StartStop)).setText("Play");
+		}
+		else
+		{
+			this.mBoundService.play();
+			((Button)this.findViewById(R.id.StartStop)).setText("Stop");
+		}
 		
-		
-		buttons.add(button);
-		
-		SelectorDialog d = new SelectorDialog(v.getContext(),"Minoség",buttons);
-		d.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-		d.show();
-		
-	
 	}
 	
 	public void ustream(View v)
@@ -209,9 +247,6 @@ public class Main extends Activity {
 			      
 				  Uri u = Uri.parse("http://www.ustream.tv/mobile/view/channel/6358375");
 			        intent.setData(u);
-			        
-			      
-			        
 			        
 			       v.getContext().startActivity(intent);
 				
@@ -259,9 +294,6 @@ public class Main extends Activity {
 			      
 				  Uri u = Uri.parse("http://www.ustream.tv/mobile/view/channel/6926046");
 			        intent.setData(u);
-			        
-			      
-			        
 			        
 			       v.getContext().startActivity(intent);
 				
