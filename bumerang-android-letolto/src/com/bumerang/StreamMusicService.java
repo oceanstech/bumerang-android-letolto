@@ -20,6 +20,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.widget.RemoteViews;
+import android.telephony.TelephonyManager;
 
 public class StreamMusicService extends Service {
 	
@@ -33,6 +34,7 @@ public class StreamMusicService extends Service {
 	private NotificationManager mManager;
 	private BroadcastReceiver   HeadPhoneButtonReciver;
 	private int actual_station=0;
+	private int broadcastcall = 0;
 	
 	private String[] channels = {	"http://neofmstream.gtk.hu:8080",
 									"http://neofmstream2.gtk.hu:8080",
@@ -76,6 +78,7 @@ public class StreamMusicService extends Service {
 		 Intent startMplayer = new Intent(this,Main.class);
 		 startMplayer.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		 contentView.setTextViewText(R.id.Title, "NeoFM - WebRádió");
+		 contentView.setTextViewText(R.id.Status, "Bufferelés");
 		 
 		PendingIntent pendingIntent = PendingIntent.getActivity(this,
 				    0 , startMplayer  , 0);
@@ -87,11 +90,27 @@ public class StreamMusicService extends Service {
 
 				@Override
 				public void onReceive(Context arg0, Intent arg1) {
-					
-					if(player.isPlaying()) stop();
+					 TelephonyManager tm = (TelephonyManager) arg0.getSystemService(Context.TELEPHONY_SERVICE);
+		                if (tm.getCallState() == TelephonyManager.CALL_STATE_IDLE) {
+					if(broadcastcall==0)
+					{
+					if(player.isPlaying()) inner_stop();
 					else play();
-					abortBroadcast();
+					broadcastcall++;
+					}
+					else
+					{
+						broadcastcall=0;
+					}
 					
+					
+					abortBroadcast();
+		                }
+		                else
+		                {
+		                	if(player.isPlaying()) inner_stop();
+		                }
+		                
 				}};
 	}
 
@@ -119,8 +138,9 @@ public class StreamMusicService extends Service {
 
 			@Override
 			public void onBufferingUpdate(MediaPlayer mp, int percent) {
-				contentView.setTextViewText(R.id.Status, "Bufferelés:" + String.valueOf(percent)+"%");
-				mManager.notify(50, notifyDetails);
+				if(!player.isPlaying())
+				{contentView.setTextViewText(R.id.Status, "Bufferelés");
+				mManager.notify(50, notifyDetails);}
 				
 			}};
 			
@@ -161,12 +181,21 @@ public class StreamMusicService extends Service {
 		return player.isPlaying();
 	}
 
-	public void stop()
+	public void inner_stop()
 	{
 		if(player.isPlaying()) player.stop();
 		mManager.cancel(50);
 		player.reset();
 		
+		
+	}
+	
+	public void stop()
+	{
+		if(player.isPlaying()) player.stop();
+		mManager.cancel(50);
+		player.reset();
+		this.unregisterReciver();
 		
 	}
 	
@@ -195,7 +224,8 @@ public class StreamMusicService extends Service {
 	{
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Intent.ACTION_MEDIA_BUTTON);
-		filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY-1);
+		
+		filter.setPriority(2000000);
 		
 		this.registerReceiver(HeadPhoneButtonReciver, filter);
 		
