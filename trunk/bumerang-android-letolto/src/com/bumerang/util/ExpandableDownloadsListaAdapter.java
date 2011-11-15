@@ -1,6 +1,7 @@
 package com.bumerang.util;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -9,9 +10,13 @@ import com.bumerang.model.FileManager;
 import com.bumerang.model.Letoltesek;
 
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -88,7 +93,7 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 
 			@Override
 			public void onClick(View v) {
-				
+								
 				Uri u = Uri.parse("file://"+files.get(groupPosition).get(childPosition)[1]);
 		        Intent intent = new Intent(Intent.ACTION_VIEW);
 		       intent.setDataAndType(u,"audio/mp3"); 
