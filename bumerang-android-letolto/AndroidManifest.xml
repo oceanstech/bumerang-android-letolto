@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="1.02"
-    package="com.bumerang" xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="com.bumerang" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.2" android:versionCode="23">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
+         <service android:name="com.bumerang.StreamMusicService"></service>
         <activity android:label="@string/app_name" android:name=".Main" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,9 +28,18 @@
         </activity>
         <provider
             android:authorities="com.bumerang.util.downloadscontentprovider" android:name=".util.db.DOWNLOADSContentProvider"/>
+        <activity android:name=".util.BumerangMusicPlayer" android:screenOrientation="portrait">
+            
+             <intent-filter>
+                <action android:name="android.intent.action.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+       
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-sdk android:minSdkVersion="7"/>
 </manifest>
