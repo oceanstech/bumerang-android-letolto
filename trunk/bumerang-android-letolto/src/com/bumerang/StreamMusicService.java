@@ -118,6 +118,7 @@ public class StreamMusicService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		this.unregisterReciver();
+		mManager.cancel(50);
 	}
 
 	@Override
