@@ -15,7 +15,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.bumerang.dialogs.Info;
 import com.bumerang.dialogs.SelectorDialog;
 
-
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -138,7 +137,7 @@ private StreamMusicService mBoundService;
 	    }
 	    
 	    
-	    	
+	    
 	    
 
 	    public void onServiceDisconnected(ComponentName className) {
@@ -230,6 +229,12 @@ private StreamMusicService mBoundService;
 	{
 		Intent intent = new Intent().setClass(this, BumerangCalendar.class);
 		startActivity(intent);
+	}
+	
+	
+	public void pop(View v){
+		Intent i = new Intent(this,FragmentTabsPager.class);
+		this.startActivity(i);
 	}
 	
 	public void online(View v)
