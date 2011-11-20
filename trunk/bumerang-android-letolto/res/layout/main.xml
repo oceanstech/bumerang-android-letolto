@@ -46,7 +46,7 @@
         android:background="@drawable/main_button_bg"
         android:clickable="true"
         android:focusable="true"
-       >
+        android:onClick="pop" >
 
         <RelativeLayout
             android:id="@+id/RelativeLayout01"
