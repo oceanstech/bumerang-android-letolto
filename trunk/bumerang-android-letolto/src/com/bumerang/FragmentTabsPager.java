@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright 2011 Ait-Said Sofian
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package com.bumerang;
 
 import java.io.IOException;
@@ -8,6 +23,7 @@ import org.apache.http.client.ClientProtocolException;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -15,7 +31,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -38,7 +57,10 @@ public class FragmentTabsPager extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFormat(PixelFormat.RGBA_8888);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
         setContentView(R.layout.fragment_tabs_pager);
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
         mTabW = (TabWidget)findViewById(android.R.id.tabs);
@@ -55,9 +77,16 @@ public class FragmentTabsPager extends FragmentActivity {
         Day day;
 		try {
 			day = new Day(this.getIntent().getStringExtra("DateU"));
+			
+			LayoutInflater infalInflater = (LayoutInflater) this
+            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+   
 			 for(Musor m :day.getMusorok())
 		        {
-		        	mTabsAdapter.addTab(mTabHost.newTabSpec(m.getTime()).setIndicator(m.getTime()),
+				 
+				 TextView tv = (TextView)infalInflater.inflate(R.layout.timeview, null);
+				 tv.setText(m.getTime());
+		        	mTabsAdapter.addTab(mTabHost.newTabSpec(m.getTime()).setIndicator(tv),
 		                    MusorFragment.class, null);
 		        }
 			 for(int i = 0; i<mTabW.getChildCount();i++)
