@@ -14,14 +14,25 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/time_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@drawable/main_buttonbar" >
+
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/timeview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/tab_bg"
-    android:paddingLeft="50dip"
-    android:paddingTop="15dip" 
-    android:paddingRight="50dip"
-    android:textSize="25dip" >
-
-</TextView>
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:gravity="center_vertical|center_horizontal"
+    android:shadowColor="#000"
+    android:shadowDx="1"
+    android:shadowDy="1"
+    android:shadowRadius="1"
+    android:textSize="20dip" android:layout_marginLeft="40dip" android:layout_marginRight="40dip"/>
+        
+    </RelativeLayout>

@@ -43,8 +43,9 @@
                 <TabWidget
                     android:id="@android:id/tabs"
                     android:layout_width="fill_parent"
-                    android:layout_height="60dip"
-                    android:orientation="horizontal" >
+                    android:layout_height="40dp"
+                    android:orientation="horizontal" android:scrollbars="none" android:scrollbarAlwaysDrawHorizontalTrack="false" android:scrollbarAlwaysDrawVerticalTrack="false">
+
                 </TabWidget>
             </LinearLayout>
         </HorizontalScrollView>

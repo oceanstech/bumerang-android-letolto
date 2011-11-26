@@ -48,11 +48,19 @@ import com.bumerang.model.Day;
 import com.bumerang.model.Musor;
 
 public class FragmentTabsPager extends FragmentActivity {
-    TabHost mTabHost;
+    public interface OnTabSelectionChanged {
+
+    	
+    	 void onTabSelectionChanged(int tabIndex, boolean clicked);
+	}
+
+	TabHost mTabHost;
     ViewPager  mViewPager;
     TabsAdapter mTabsAdapter;
 	private HorizontalScrollView scrollTabHeader;
 	private TabWidget mTabW;
+	
+	private OnTabSelectionChanged mSelectionChangedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +80,9 @@ public class FragmentTabsPager extends FragmentActivity {
         mViewPager = (ViewPager)findViewById(R.id.pager);
 
         mTabsAdapter = new TabsAdapter(this, mTabHost, mViewPager);
+        mTabW.setDividerDrawable(R.drawable.vertical_separator);
         
-      
+         
         Day day;
 		try {
 			day = new Day(this.getIntent().getStringExtra("DateU"));
@@ -83,24 +92,19 @@ public class FragmentTabsPager extends FragmentActivity {
    
 			 for(Musor m :day.getMusorok())
 		        {
-				 
-				 TextView tv = (TextView)infalInflater.inflate(R.layout.timeview, null);
+				 View rl = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.timeview, null);
+				 TextView tv = (TextView) rl.findViewById(R.id.timeview);
 				 tv.setText(m.getTime());
-		        	mTabsAdapter.addTab(mTabHost.newTabSpec(m.getTime()).setIndicator(tv),
+		        	mTabsAdapter.addTab(mTabHost.newTabSpec(m.getTime()).setIndicator(rl),
 		                    MusorFragment.class, null);
 		        }
 			 for(int i = 0; i<mTabW.getChildCount();i++)
 			 {
-				 mTabW.getChildAt(i).setBackgroundResource(R.drawable.tab_bg);
-			 mTabW.getChildAt(i).setOnClickListener(new OnClickListener(){
-
-					@Override
-					public void onClick(View v) {
-						int x = v.getLeft();
-						int y = v.getScrollY();
-						scrollTabHeader.scrollBy(x, y);
-						
-					}});
+				// mTabW.getChildAt(i).setBackgroundResource(R.drawable.tab_bg);
+			
+			 mTabW.getChildAt(i).setOnClickListener(new TabClickListener(i));
+			
+			 
 			 }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -117,6 +121,32 @@ public class FragmentTabsPager extends FragmentActivity {
         }
     }
 
+    
+    private class TabClickListener implements OnClickListener 
+    {
+    	private final int Tabindex;
+    	
+    	private TabClickListener(int ind)
+    	{
+    		Tabindex = ind;
+    	}
+    	
+    	
+		@Override
+		public void onClick(View v) {
+			int x = v.getLeft();
+			int y = v.getScrollY();
+			int sc_x = scrollTabHeader.getScrollX() + (scrollTabHeader.getWidth()/2);
+			int this_width = v.getWidth()/2;
+			
+			int sc_y = scrollTabHeader.getScrollY();
+			scrollTabHeader.scrollBy(x-sc_x+this_width, y);
+			mTabW.getChildAt(Tabindex).setSelected(true);
+			
+		}
+    	
+    }
+    
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
