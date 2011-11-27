@@ -92,17 +92,20 @@ public class FragmentTabsPager extends FragmentActivity {
    
 			 for(Musor m :day.getMusorok())
 		        {
+				 Bundle data = new Bundle();
+				 data.putString("Content", m.getTartalom());
+				 data.putString("Image", m.getImgurl());
 				 View rl = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.timeview, null);
 				 TextView tv = (TextView) rl.findViewById(R.id.timeview);
 				 tv.setText(m.getTime());
 		        	mTabsAdapter.addTab(mTabHost.newTabSpec(m.getTime()).setIndicator(rl),
-		                    MusorFragment.class, null);
+		                    MusorFragment.class, data);
 		        }
-			 for(int i = 0; i<mTabW.getChildCount();i++)
+			 for(int i = 0; i<mTabW.getChildCount();i+=2)
 			 {
 				// mTabW.getChildAt(i).setBackgroundResource(R.drawable.tab_bg);
 			
-			 mTabW.getChildAt(i).setOnClickListener(new TabClickListener(i));
+			 mTabW.getChildAt(i).setOnClickListener(new TabClickListener(i/2));
 			
 			 
 			 }
@@ -141,7 +144,7 @@ public class FragmentTabsPager extends FragmentActivity {
 			
 			int sc_y = scrollTabHeader.getScrollY();
 			scrollTabHeader.scrollBy(x-sc_x+this_width, y);
-			mTabW.getChildAt(Tabindex).setSelected(true);
+			mTabHost.setCurrentTab(Tabindex);
 			
 		}
     	
@@ -165,7 +168,7 @@ public class FragmentTabsPager extends FragmentActivity {
      * tab changes.
      */
     public static class TabsAdapter extends FragmentPagerAdapter
-            implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
+        implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
         private final Context mContext;
         private final TabHost mTabHost;
         private final ViewPager mViewPager;

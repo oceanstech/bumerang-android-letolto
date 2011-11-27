@@ -43,6 +43,10 @@ public class Musor{
 	private String title_text;
 	private String imgurl;
 	private Bitmap image;
+	public String getImgurl() {
+		return imgurl;
+	}
+
 	private String tartalom;
 	private ImageServer is;
 	private ArrayList<String> videos;
