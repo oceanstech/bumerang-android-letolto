@@ -14,7 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<manifest package="com.bumerang" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.2" android:versionCode="23">
+<manifest package="com.bumerang" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.3" android:versionCode="33">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
          <service android:name="com.bumerang.StreamMusicService"></service>
         <activity android:label="@string/app_name" android:name=".Main" android:screenOrientation="portrait">

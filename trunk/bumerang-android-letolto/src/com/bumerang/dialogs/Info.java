@@ -79,7 +79,7 @@ public class Info extends Dialog {
 			public void onClick(View v) {
 				Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
 
-				Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
+				Uri u = Uri.parse("http://modevel.blogspot.com/2011/10/bumerang-android-letolto.html");
 				intent.setData(u);
 
 
@@ -109,13 +109,13 @@ public class Info extends Dialog {
 				Button button = (Button) infalInflater.inflate(R.layout.selector_button, null);
 
 
-				button.setText("Logout információs oldal");
+				button.setText("MoDev Blog - Ötletek jöhetnek ide is :)");
 				button.setOnClickListener(new View.OnClickListener(){
 
 					public void onClick(View v) {
 						Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
 
-						Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
+						Uri u = Uri.parse("http://modevel.blogspot.com/2011/10/bumerang-android-letolto.html");
 						intent.setData(u);
 
 						v.getContext().startActivity(intent);
@@ -164,13 +164,13 @@ public class Info extends Dialog {
 				button.setOnClickListener(sendemail);
 				l.addView(button);
 				button = (Button) infalInflater.inflate(R.layout.selector_button, null);
-				button.setText("Logout információs oldal");
+				button.setText("MoDev Blog - Ötletek jöhetnek ide is :)");
 				button.setOnClickListener(new View.OnClickListener(){
 
 					public void onClick(View v) {
 						Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
 
-						Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
+						Uri u = Uri.parse("http://modevel.blogspot.com/2011/10/bumerang-android-letolto.html");
 						intent.setData(u);
 
 						v.getContext().startActivity(intent);
@@ -203,7 +203,7 @@ public class Info extends Dialog {
 
 				createButton("Írj véleményt",sendemail);
 				
-				createButton("Logout információs oldal",logout_listener);
+				createButton("MoDev Blog - Ötletek jöhetnek ide is :)",logout_listener);
 
 				createButton("Kapcsolódási hiba...",null);
 
@@ -220,7 +220,7 @@ public class Info extends Dialog {
 
 			createButton("Írj véleményt",sendemail);
 
-			createButton("Logout információs oldal",logout_listener);
+			createButton("MoDev Blog - Ötletek jöhetnek ide is :)",logout_listener);
 
 			createButton("Lekérdezés folyamatban...",null);
 			
@@ -281,13 +281,13 @@ public class Info extends Dialog {
 		l.addView(button);
 		button = (Button) infalInflater.inflate(R.layout.selector_button, null);
 		
-		button.setText("Logout információs oldal");
+		button.setText("MoDev Blog - Ötletek jöhetnek ide is :)");
 		button.setOnClickListener(new View.OnClickListener(){
 
 			public void onClick(View v) {
 				Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
 
-				Uri u = Uri.parse("http://logout.hu/bejegyzes/sofian/bumerang_letolto_android/hsz_1-50.html");
+				Uri u = Uri.parse("http://modevel.blogspot.com/2011/10/bumerang-android-letolto.html");
 				intent.setData(u);
 
 				v.getContext().startActivity(intent);

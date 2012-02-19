@@ -28,12 +28,7 @@ import android.widget.Toast;
 public class ViewPagerAdapter extends PagerAdapter
 implements TitleProvider
 {
-private static String[] titles = new String[]
-{
-    "Page 1",
-    "Page 2",
-    "Page 3"
-};
+
 private FileManager filemanager;
 private final Context context;
 private ArrayList<Musor> Musorok;
