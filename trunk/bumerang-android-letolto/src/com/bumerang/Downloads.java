@@ -167,7 +167,7 @@ public class Downloads extends Activity {
 		// Handle item selection
 		
 
-			Intent i = new Intent(this,FragmentTabsPager.class);
+			Intent i = new Intent(this,MusorPagerActivity.class);
 			i.putExtra("DateU", DateUrl);
 			this.startActivity(i);
 			/*
