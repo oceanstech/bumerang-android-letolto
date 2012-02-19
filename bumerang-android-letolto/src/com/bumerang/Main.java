@@ -247,10 +247,7 @@ private StreamMusicService mBoundService;
 	}
 	
 	
-	public void pop(View v){
-		Intent i = new Intent(this,FragmentTabsPager.class);
-		this.startActivity(i);
-	}
+	
 	
 	public void online(View v)
 	{
