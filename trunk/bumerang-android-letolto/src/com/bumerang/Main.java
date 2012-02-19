@@ -62,12 +62,25 @@ public class Main extends Activity {
 	
 	
 	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		if(mBoundService!=null){
+		if(mBoundService.isplaying())
+		this.mBoundService.emiss();
+		}
+	}
+
+	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		if(mBoundService!=null){
 			if(this.mBoundService.isplaying())
+			{
 				((Button)this.findViewById(R.id.StartStop)).setText("Stop");
+				this.mBoundService.dismiss();
+			}
 				else
 					((Button)this.findViewById(R.id.StartStop)).setText("Play");
 		}
@@ -80,7 +93,11 @@ public class Main extends Activity {
 		super.onStart();
 		if(mBoundService!=null){
 			if(this.mBoundService.isplaying())
+			{
+				this.mBoundService.dismiss();
 				((Button)this.findViewById(R.id.StartStop)).setText("Stop");
+			}
+				
 				else
 					((Button)this.findViewById(R.id.StartStop)).setText("Play");
 		}
@@ -90,6 +107,7 @@ public class Main extends Activity {
 	@Override
 	protected void onDestroy() {
 		if(this.isFinishing())
+			if(mIsBound)
 		this.doUnbindService();
 		super.onDestroy();
 		
@@ -145,9 +163,12 @@ private StreamMusicService mBoundService;
 	        // cast its IBinder to a concrete class and directly access it.
 	        mBoundService = ((StreamMusicService.MusicServiceBinder)service).getservice(); 
 	        if(mBoundService!=null){
+	        	
 				if(mBoundService.isplaying())
+				{
+					mBoundService.dismiss();
 					setbutton("Stop");
-					
+				}	
 			}
 	    }
 	    
@@ -172,6 +193,7 @@ private StreamMusicService mBoundService;
 	    bindService(new Intent(Main.this, 
 	            StreamMusicService.class), mConnection, Context.BIND_AUTO_CREATE);
 	    mIsBound = true;
+	    
 	}
 	
 	protected void setbutton(String string) {
@@ -182,8 +204,12 @@ private StreamMusicService mBoundService;
 	void doUnbindService() {
 	    if (mIsBound) {
 	        // Detach our existing connection.
+	    	this.mBoundService.emiss();
+	    	
 	        unbindService(mConnection);
+	        
 	        mIsBound = false;
+	       
 	    }
 	}
 	
@@ -214,6 +240,8 @@ private StreamMusicService mBoundService;
 		
 		CheckUpdate dt = new CheckUpdate(context);
 		  dt.start();
+		  
+		 
 		  
 		  	
 	}

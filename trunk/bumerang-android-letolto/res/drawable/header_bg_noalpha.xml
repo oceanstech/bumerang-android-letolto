@@ -14,9 +14,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<Button
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:padding="5dp" android:text="Lejátszás" android:drawableLeft="@drawable/play" android:background="@drawable/child_button_bg" android:textSize="16dip">
-    
-</Button>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+android:shape="rectangle">
+<stroke android:width="1px" android:color="#BB000000" />
+        <gradient
+                android:startColor="#FFE20000"
+                android:endColor="#FFEE0000"
+                android:angle="270"
+              
+                />
+                
+              
+</shape>

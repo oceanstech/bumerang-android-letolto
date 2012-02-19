@@ -24,9 +24,11 @@ import com.bumerang.R;
 import com.bumerang.model.FileManager;
 import com.bumerang.model.Letoltesek;
 
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaPlayer;
@@ -99,9 +101,26 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 
 			@Override
 			public void onClick(View v) {
-				
-					data.deleteFile(groupPosition, childPosition);
-					NotifyDataChanged();
+				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+				    @Override
+				    public void onClick(DialogInterface dialog, int which) {
+				        switch (which){
+				        case DialogInterface.BUTTON_POSITIVE:
+				        	data.deleteFile(groupPosition, childPosition);
+							NotifyDataChanged();
+				            break;
+
+				        case DialogInterface.BUTTON_NEGATIVE:
+				            //No button clicked
+				            break;
+				        }
+				    }
+				};
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+				builder.setMessage("Biztos törölni szeretnéd?").setPositiveButton("Igen", dialogClickListener)
+				    .setNegativeButton("Nem", dialogClickListener).show();
+					
 				
 			}});
 	 holder.playbutton.setOnClickListener(new OnClickListener(){
@@ -159,9 +178,26 @@ public class ExpandableDownloadsListaAdapter extends BaseExpandableListAdapter{
 
 			@Override
 			public void onClick(View v) {
-				
-					data.deleteAlbum(groupPosition);
-					NotifyDataChanged();
+				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+				    @Override
+				    public void onClick(DialogInterface dialog, int which) {
+				        switch (which){
+				        case DialogInterface.BUTTON_POSITIVE:
+				        	data.deleteAlbum(groupPosition);
+							NotifyDataChanged();
+				            break;
+
+				        case DialogInterface.BUTTON_NEGATIVE:
+				            //No button clicked
+				            break;
+				        }
+				    }
+				};
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+				builder.setMessage("Biztos törölni szeretnéd?").setPositiveButton("Igen", dialogClickListener)
+				    .setNegativeButton("Nem", dialogClickListener).show();
+					
 				
 			}});
 				

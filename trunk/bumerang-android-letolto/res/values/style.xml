@@ -15,6 +15,18 @@
   limitations under the License.
 -->
 <resources>
+    
+    <style parent="Widget.TitlePageIndicator"
+        name="Widget.MyTitlepageIndicator">
+        <item name="footerColor">#DDE20000</item>
+        <item name="footerIndicatorStyle">underline</item>
+         
+        <item name="footerIndicatorHeight">3dp</item>
+        <item name="footerLineHeight">1.5dp</item>
+        <item name="footerPadding">6dp</item>
+        <item name="selectedColor">#DDE20000</item>
+    </style>
+    
 <style name="CustomDialogTheme" parent="android:style/Theme.Dialog">
 
 
