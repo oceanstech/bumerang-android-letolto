@@ -21,9 +21,11 @@ public class DownloadThreadQueue
 {
    private final int nThreads;
     private final PoolWorker[] threads;
-    private final LinkedList queue;
+    public final LinkedList queue;
     private static DownloadThreadQueue instance;
 
+    
+    
     private DownloadThreadQueue(int nThreads)
     {
         this.nThreads = nThreads;
@@ -52,6 +54,7 @@ public class DownloadThreadQueue
             queue.notify();
         }
     }
+   
 
     private class PoolWorker extends Thread {
         public void run() {

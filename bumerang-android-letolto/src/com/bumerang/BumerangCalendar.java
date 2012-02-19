@@ -119,7 +119,7 @@ public class BumerangCalendar extends Activity {
     	 format =
          new SimpleDateFormat("yyyy MMMM d.",Magyar);
     	 URLDateFormat = new SimpleDateFormat("yyyyMMdd",Magyar);
-    	 intent = new Intent().setClass(this, Downloads.class);
+    	 intent = new Intent().setClass(this, MusorPagerActivity.class);
     	
     	 storage = FileManager.getInstance();
     	 

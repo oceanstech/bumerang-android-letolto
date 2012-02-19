@@ -112,6 +112,12 @@ public class StreamMusicService extends Service {
 					if(player.isPlaying()) inner_stop();
 					else play();
 					broadcastcall++;
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					}
 					else
 					{
@@ -132,7 +138,13 @@ public class StreamMusicService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		this.unregisterReciver();
+		try
+		{this.unregisterReciver();
+		
+		}
+		catch(Exception e)
+		{e.printStackTrace();};
+		if(player!=null&& player.isPlaying()) player.stop();
 		mManager.cancel(50);
 	}
 
@@ -251,6 +263,24 @@ public class StreamMusicService extends Service {
 	{
 		
 	this.unregisterReceiver(HeadPhoneButtonReciver);
+	}
+
+	public void dismiss() {
+		
+		mManager.cancel(50);
+		
+	}
+
+	public void emiss() {
+		if(player!=null && player.isPlaying())
+		{
+			mManager.notify(50, notifyDetails);
+		}		
+		else
+		{
+			this.stopSelf();
+		}
+		
 	}
 	
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Copyright 2011 Ait-Said Sofian
   
@@ -14,9 +14,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<Button
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:padding="5dp" android:text="Letölt" android:drawableLeft="@drawable/saved" android:background="@drawable/child_button_bg" android:textSize="16dip">
-    
-</Button>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<solid android:color="#F000"/>
+<stroke android:width="1px" android:color="#BB000000" />
+
+
+<gradient
+android:angle="90"
+
+android:centerColor="#66EC3535"
+android:startColor="#66EC3535"
+android:endColor="#DDE20000"
+android:type="linear"
+/>
+
+</shape>
